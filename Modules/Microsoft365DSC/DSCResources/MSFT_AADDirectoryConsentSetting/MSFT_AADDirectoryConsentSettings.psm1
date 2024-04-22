@@ -1,4 +1,5 @@
-function Get-TargetResource {
+function Get-TargetResource
+{
     [CmdletBinding()]
     [OutputType([System.Collections.Hashtable])]
     param
@@ -61,7 +62,7 @@ function Get-TargetResource {
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
-    
+
     #region Telemetry
     $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
     $CommandName = $MyInvocation.MyCommand
@@ -73,17 +74,20 @@ function Get-TargetResource {
 
     $nullReturn = $PSBoundParameters
     $nullReturn.Ensure = 'Absent'
-    try {
-        $consentSettingsTemplateId = "dffd5d46-495d-40a9-8e21-954ff55e198a" # Consent Policy Settings
+    try
+    {
+        $consentSettingsTemplateId = 'dffd5d46-495d-40a9-8e21-954ff55e198a' # Consent Policy Settings
         $Policy = Get-MgBetaDirectorySetting -ErrorAction Stop
         $Policy = Get-MgBetaDirectorySetting | Where-Object { $_.TemplateId -eq $consentSettingsTemplateId }
 
-        if ($null -eq $Policy) {
+        if ($null -eq $Policy)
+        {
             return $nullReturn
         }
-        else {
+        else
+        {
             Write-Verbose -Message 'Get-TargetResource: Found existing directory setting'
-    
+
             $result = @{
                 IsSingleInstance                                = 'Yes'
                 DisplayName                                     = $Policy.DisplayName
@@ -100,12 +104,13 @@ function Get-TargetResource {
                 Managedidentity                                 = $ManagedIdentity.IsPresent
                 Id                                              = $Policy.Id
             }
-    
+
             Write-Verbose -Message "Get-TargetResource Result: `n $(Convert-M365DscHashtableToString -Hashtable $result)"
             return $result
         }
     }
-    catch {
+    catch
+    {
         New-M365DSCLogEntry -Message 'Error retrieving data:' `
             -Exception $_ `
             -Source $($MyInvocation.MyCommand.Source) `
@@ -116,7 +121,8 @@ function Get-TargetResource {
     }
 }
 
-function Set-TargetResource {
+function Set-TargetResource
+{
     [CmdletBinding()]
     param
     (
@@ -176,40 +182,41 @@ function Set-TargetResource {
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
 
-        #region Telemetry
-        $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
-        $CommandName = $MyInvocation.MyCommand
-        $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
-            -CommandName $CommandName `
-            -Parameters $PSBoundParameters
-        Add-M365DSCTelemetryEvent -Data $data
-        #endregion
+    #region Telemetry
+    $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
+    $CommandName = $MyInvocation.MyCommand
+    $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
+        -CommandName $CommandName `
+        -Parameters $PSBoundParameters
+    Add-M365DSCTelemetryEvent -Data $data
+    #endregion
 
     $currentPolicy = Get-TargetResource @PSBoundParameters
 
     # Policy should exist but it doesn't
     $needToUpdate = $false
-    if ($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Absent') {
-        Write-Verbose "Consent Policy not present"
-        $consentSettingsTemplateId = "dffd5d46-495d-40a9-8e21-954ff55e198a" # Consent Policy Settings
+    if ($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Absent')
+    {
+        Write-Verbose 'Consent Policy not present'
+        $consentSettingsTemplateId = 'dffd5d46-495d-40a9-8e21-954ff55e198a' # Consent Policy Settings
         $params = @{
             TemplateId = $consentSettingsTemplateId
             Values     = @(
-                @{ 
-                    Name  = "BlockUserConsentForRiskyApps"
-                    Value = "True"
+                @{
+                    Name  = 'BlockUserConsentForRiskyApps'
+                    Value = 'True'
                 }
-                @{ 
-                    Name  = "ConstrainGroupSpecificConsentToMembersOfGroupId"
-                    Value = ""
+                @{
+                    Name  = 'ConstrainGroupSpecificConsentToMembersOfGroupId'
+                    Value = ''
                 }
-                @{ 
-                    Name  = "EnableAdminConsentRequests"
-                    Value = "True"
+                @{
+                    Name  = 'EnableAdminConsentRequests'
+                    Value = 'True'
                 }
-                @{ 
-                    Name  = "EnableGroupSpecificConsent"
-                    Value = "True"
+                @{
+                    Name  = 'EnableGroupSpecificConsent'
+                    Value = 'True'
                 }
             )
         }
@@ -219,17 +226,22 @@ function Set-TargetResource {
 
     $Policy = Get-MgBetaDirectorySetting | Where-Object -FilterScript { $_.DisplayName -eq 'Consent Policy Settings' }
 
-    if (($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Present') -or $needToUpdate) {
-        foreach ($property in $Policy.Values) {
-            if ($property.Name -eq 'EnableGroupSpecificConsent') {
+    if (($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Present') -or $needToUpdate)
+    {
+        foreach ($property in $Policy.Values)
+        {
+            if ($property.Name -eq 'EnableGroupSpecificConsent')
+            {
                 $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'EnableGroupSpecificConsent' }
                 $entry.Value = [System.Boolean]$EnableGroupSpecificConsent
             }
-            elseif ($property.Name -eq 'BlockUserConsentForRiskyApps') {
+            elseif ($property.Name -eq 'BlockUserConsentForRiskyApps')
+            {
                 $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'BlockUserConsentForRiskyApps' }
                 $entry.Value = [System.Boolean]$BlockUserConsentForRiskyApps
             }
-            elseif ($property.Name -eq 'EnableAdminConsentRequests') {
+            elseif ($property.Name -eq 'EnableAdminConsentRequests')
+            {
                 $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'EnableAdminConsentRequests' }
                 $entry.Value = [System.Boolean]$EnableAdminConsentRequests
             }
@@ -240,7 +252,8 @@ function Set-TargetResource {
     }
 }
 
-function Test-TargetResource {
+function Test-TargetResource
+{
     [CmdletBinding()]
     [OutputType([System.Boolean])]
     param
@@ -328,7 +341,8 @@ function Test-TargetResource {
     return $TestResult
 }
 
-function Export-TargetResource {
+function Export-TargetResource
+{
     [CmdletBinding()]
     [OutputType([System.String])]
     param
@@ -363,7 +377,7 @@ function Export-TargetResource {
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
-    
+
     #region Telemetry
     $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
     $CommandName = $MyInvocation.MyCommand
@@ -373,7 +387,8 @@ function Export-TargetResource {
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    try {
+    try
+    {
         $Params = @{
             ApplicationId         = $ApplicationId
             TenantId              = $TenantId
@@ -398,7 +413,8 @@ function Export-TargetResource {
         Write-Host $Global:M365DSCEmojiGreenCheckMark
         return $dscContent
     }
-    catch {
+    catch
+    {
         Write-Host $Global:M365DSCEmojiRedX
 
         New-M365DSCLogEntry -Message 'Error during Export:' `
