@@ -20,12 +20,12 @@
 | **ServicePrincipalNames** | Write | StringArray[] | Specifies an array of service principal names. Based on the identifierURIs collection, plus the application's appId property, these URIs are used to reference an application's service principal. | |
 | **ServicePrincipalType** | Write | String | The type of the service principal. | |
 | **Tags** | Write | StringArray[] | Tags linked to this service principal.Note that if you intend for this service principal to show up in the All Applications list in the admin portal, you need to set this value to {WindowsAzureActiveDirectoryIntegratedApp} | |
-| **Ensure** | Write | String | Specify if the Azure AD App should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID App should exist or not. | `Present`, `Absent` |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |
 | **CertificateThumbprint** | Write | String | Thumbprint of the Azure Active Directory application's authentication certificate to use for authentication. | |
 | **ApplicationSecret** | Write | PSCredential | Secret of the Azure Active Directory application to authenticate with. | |
-| **Credential** | Write | PSCredential | Credentials of the Azure AD Admin | |
+| **Credential** | Write | PSCredential | Credentials of the Entra ID Admin | |
 | **ManagedIdentity** | Write | Boolean | Managed ID being used for authentication. | |
 
 ### MSFT_AADServicePrincipalRoleAssignment

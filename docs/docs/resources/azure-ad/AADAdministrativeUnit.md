@@ -36,13 +36,13 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **RoleName** | Write | String | Name of the Azure AD Role that is assigned. See https://learn.microsoft.com/en-us/azure/active-directory/roles/admin-units-assign-roles#roles-that-can-be-assigned-with-administrative-unit-scope | |
+| **RoleName** | Write | String | Name of the Entra ID Role that is assigned. See https://learn.microsoft.com/en-us/azure/active-directory/roles/admin-units-assign-roles#roles-that-can-be-assigned-with-administrative-unit-scope | |
 | **RoleMemberInfo** | Write | MSFT_MicrosoftGraphMember | Member that is assigned the scoped role. Note: Any groups must be role-enabled | |
 
 
 ## Description
 
-This resource configures an Azure AD Administrative Unit.
+This resource configures an Entra ID Administrative Unit.
 
 ## Permissions
 

@@ -25,7 +25,7 @@ Connect-MgGraph -Scopes 'Application.ReadWrite.All'
 
 NOTE:
 If consent cannot be given for whatever reason, make sure all these permissions are
-given Admin Consent by browsing to the App Registration in Azure AD > API Permissions
+given Admin Consent by browsing to the App Registration in Entra ID > API Permissions
 and clicking the "Grant admin consent for <orgname>" button.
 
 More information:

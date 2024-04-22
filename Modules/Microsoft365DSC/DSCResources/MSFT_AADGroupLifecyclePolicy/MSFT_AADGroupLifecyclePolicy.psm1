@@ -176,7 +176,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD Groups Lifecycle Policy'
+    Write-Verbose -Message 'Setting configuration of Entra ID Groups Lifecycle Policy'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies

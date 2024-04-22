@@ -87,7 +87,7 @@ function Get-TargetResource
 
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Azure AD Cross Tenant Access Configuration Partner with TenantId {$PartnerTenantId}"
+            Write-Verbose -Message "Could not find an Entra ID Cross Tenant Access Configuration Partner with TenantId {$PartnerTenantId}"
             return $nullResult
         }
 
@@ -359,7 +359,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Cross Tenant Access Policy Configuration Partner with Tenant Id [$PartnerTenantId]"
+    Write-Verbose -Message "Testing configuration of the Entra ID Cross Tenant Access Policy Configuration Partner with Tenant Id [$PartnerTenantId]"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

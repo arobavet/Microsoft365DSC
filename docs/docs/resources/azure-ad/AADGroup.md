@@ -20,7 +20,7 @@
 | **AssignedToRole** | Write | StringArray[] | DisplayName values for the roles that the group is assigned to. | |
 | **Visibility** | Write | String | This parameter determines the visibility of the group's content and members list. | `Public`, `Private`, `HiddenMembership` |
 | **AssignedLicenses** | Write | MSFT_AADGroupLicense[] | List of Licenses assigned to the group. | |
-| **Ensure** | Write | String | Specify if the Azure AD Group should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Group should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |

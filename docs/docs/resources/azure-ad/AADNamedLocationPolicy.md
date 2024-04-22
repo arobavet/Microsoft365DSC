@@ -12,7 +12,7 @@
 | **CountriesAndRegions** | Write | StringArray[] | Specifies the countries and regions for the Named Location in Azure Active Directory | |
 | **CountryLookupMethod** | Write | String | Determines what method is used to decide which country the user is located in. Possible values are clientIpAddress(default) and authenticatorAppGps. | `clientIpAddress`, `authenticatorAppGps` |
 | **IncludeUnknownCountriesAndRegions** | Write | Boolean | Specifies the includeUnknownCountriesAndRegions value for the Named Location in Azure Active Directory | |
-| **Ensure** | Write | String | Specify if the Azure AD Named Location should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Named Location should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |
@@ -22,7 +22,7 @@
 
 ## Description
 
-This resource configures the Azure AD Named Location Policies in Azure Active Directory
+This resource configures the Entra ID Named Location Policies in Azure Active Directory
 
 ## Permissions
 

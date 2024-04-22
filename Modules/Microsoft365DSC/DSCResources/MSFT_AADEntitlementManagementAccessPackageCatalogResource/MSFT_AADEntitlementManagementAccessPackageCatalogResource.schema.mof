@@ -68,7 +68,7 @@ class MSFT_AADEntitlementManagementAccessPackageCatalogResource : OMI_BaseResour
     [Write, Description("Contains information about the attributes to be collected from the requestor and sent to the resource application."), EmbeddedInstance("MSFT_MicrosoftGraphaccesspackageresourceattribute")] String Attributes[];
     [Write, Description("A description for the resource.")] String Description;
     [Write, Description("True if the resource is not yet available for assignment. Read-only.")] Boolean IsPendingOnboarding;
-    [Write, Description("The unique identifier of the resource in the origin system. In the case of an Azure AD group, this is the identifier of the group.")] String OriginId;
+    [Write, Description("The unique identifier of the resource in the origin system. In the case of an Entra ID group, this is the identifier of the group.")] String OriginId;
     [Write, Description("The type of the resource in the origin system.")] String OriginSystem;
     [Write, Description("The type of the resource.")] String ResourceType;
     [Write, Description("A unique resource locator for the resource, such as the URL for signing a user into an application.")] String Url;

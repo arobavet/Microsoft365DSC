@@ -5,7 +5,7 @@ The PnP and the Microsoft Graph modules require some setting up before using.
 
 ## PnP PowerShell
 
-When using PnP PowerShell for the first time you have to consent the PnP Management Shell Multi-Tenant Azure AD Application via the following cmdlet:
+When using PnP PowerShell for the first time you have to consent the PnP Management Shell Multi-Tenant Entra ID Application via the following cmdlet:
 
 ```PowerShell
 Register-PnPManagementShellAccess

@@ -13,7 +13,7 @@
 | **AppsAllowTrustedAppsSideloading** | Write | String | Indicates whether apps from AppX packages signed with a trusted certificate can be side loaded. Possible values are: notConfigured, blocked, allowed. | `notConfigured`, `blocked`, `allowed` |
 | **AppsBlockWindowsStoreOriginatedApps** | Write | Boolean | Indicates whether or not to disable the launch of all apps from Windows Store that came pre-installed or were downloaded. | |
 | **AuthenticationAllowSecondaryDevice** | Write | Boolean | Allows secondary authentication devices to work with Windows. | |
-| **AuthenticationPreferredAzureADTenantDomainName** | Write | String | Specifies the preferred domain among available domains in the Azure AD tenant. | |
+| **AuthenticationPreferredAzureADTenantDomainName** | Write | String | Specifies the preferred domain among available domains in the Entra ID tenant. | |
 | **AuthenticationWebSignIn** | Write | String | Indicates whether or not Web Credential Provider will be enabled. Possible values are: notConfigured, enabled, disabled. | `notConfigured`, `enabled`, `disabled` |
 | **BluetoothAllowedServices** | Write | StringArray[] | Specify a list of allowed Bluetooth services and profiles in hex formatted strings. | |
 | **BluetoothBlockAdvertising** | Write | Boolean | Whether or not to Block the user from using bluetooth advertising. | |
@@ -203,7 +203,7 @@
 | **SearchDisableUseLocation** | Write | Boolean | Specifies if search can use location information. | |
 | **SearchEnableAutomaticIndexSizeManangement** | Write | Boolean | Specifies minimum amount of hard drive space on the same drive as the index location before indexing stops. | |
 | **SearchEnableRemoteQueries** | Write | Boolean | Indicates whether or not to block remote queries of this computers index. | |
-| **SecurityBlockAzureADJoinedDevicesAutoEncryption** | Write | Boolean | Specify whether to allow automatic device encryption during OOBE when the device is Azure AD joined (desktop only). | |
+| **SecurityBlockAzureADJoinedDevicesAutoEncryption** | Write | Boolean | Specify whether to allow automatic device encryption during OOBE when the device is Entra ID joined (desktop only). | |
 | **SettingsBlockAccountsPage** | Write | Boolean | Indicates whether or not to block access to Accounts in Settings app. | |
 | **SettingsBlockAddProvisioningPackage** | Write | Boolean | Indicates whether or not to block the user from installing provisioning packages. | |
 | **SettingsBlockAppsPage** | Write | Boolean | Indicates whether or not to block access to Apps in Settings app. | |

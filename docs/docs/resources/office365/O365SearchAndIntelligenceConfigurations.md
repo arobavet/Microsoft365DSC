@@ -6,9 +6,9 @@
 | --- | --- | --- | --- | --- |
 | **IsSingleInstance** | Key | String | Specifies the resource is a single instance, the value must be 'Yes' | `Yes` |
 | **ItemInsightsIsEnabledInOrganization** | Write | Boolean | Specifies whether or not Item Insights should be available for the organization. | |
-| **ItemInsightsDisabledForGroup** | Write | String | Specifies a single Azure AD Group for which Item Insights needs to be disabled. | |
+| **ItemInsightsDisabledForGroup** | Write | String | Specifies a single Entra ID Group for which Item Insights needs to be disabled. | |
 | **PersonInsightsIsEnabledInOrganization** | Write | Boolean | Specifies whether or not Person Insights should be available for the organization. | |
-| **PersonInsightsDisabledForGroup** | Write | String | Specifies a single Azure AD Group for which Person Insights needs to be disabled. | |
+| **PersonInsightsDisabledForGroup** | Write | String | Specifies a single Entra ID Group for which Person Insights needs to be disabled. | |
 | **Credential** | Write | PSCredential | Credentials of the Global Admin | |
 
 ## Description

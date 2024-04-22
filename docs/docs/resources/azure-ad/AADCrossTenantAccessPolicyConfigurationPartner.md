@@ -5,12 +5,12 @@
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
 | **PartnerTenantId** | Key | String | The tenant identifier for the partner Azure Active Directory (Azure AD) organization. | |
-| **B2BCollaborationInbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users from other organizations accessing your resources via Azure AD B2B collaboration. | |
-| **B2BCollaborationOutbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Azure AD B2B collaboration. | |
-| **B2BDirectConnectInbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users from other organizations accessing your resources via Azure AD B2B direct connect. | |
-| **B2BDirectConnectOutbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Azure AD B2B direct connect. | |
+| **B2BCollaborationInbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users from other organizations accessing your resources via Entra ID B2B collaboration. | |
+| **B2BCollaborationOutbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Entra ID B2B collaboration. | |
+| **B2BDirectConnectInbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users from other organizations accessing your resources via Entra ID B2B direct connect. | |
+| **B2BDirectConnectOutbound** | Write | MSFT_AADCrossTenantAccessPolicyB2BSetting | Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Entra ID B2B direct connect. | |
 | **AutomaticUserConsentSettings** | Write | MSFT_AADCrossTenantAccessPolicyAutomaticUserConsentSettings | Determines the partner-specific configuration for accepting trust claims from other tenant invitations. | |
-| **InboundTrust** | Write | MSFT_AADCrossTenantAccessPolicyInboundTrust | Determines the partner-specific configuration for trusting other Conditional Access claims from external Azure AD organizations. | |
+| **InboundTrust** | Write | MSFT_AADCrossTenantAccessPolicyInboundTrust | Determines the partner-specific configuration for trusting other Conditional Access claims from external Entra ID organizations. | |
 | **Ensure** | Write | String | Specify if the policy should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials of the Admin | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
@@ -61,14 +61,14 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **IsCompliantDeviceAccepted** | Write | Boolean | Specifies whether compliant devices from external Azure AD organizations are trusted. | |
-| **IsHybridAzureADJoinedDeviceAccepted** | Write | Boolean | Specifies whether hybrid Azure AD joined devices from external Azure AD organizations are trusted. | |
-| **IsMfaAccepted** | Write | Boolean | Specifies whether MFA from external Azure AD organizations is trusted. | |
+| **IsCompliantDeviceAccepted** | Write | Boolean | Specifies whether compliant devices from external Entra ID organizations are trusted. | |
+| **IsHybridAzureADJoinedDeviceAccepted** | Write | Boolean | Specifies whether hybrid Entra ID joined devices from external Entra ID organizations are trusted. | |
+| **IsMfaAccepted** | Write | Boolean | Specifies whether MFA from external Entra ID organizations is trusted. | |
 
 
 ## Description
 
-This resource manages Azure AD Cross Tenant Access Policies Configuration Partner.
+This resource manages Entra ID Cross Tenant Access Policies Configuration Partner.
 
 ## Permissions
 

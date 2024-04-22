@@ -9,7 +9,7 @@
 | **BlockUserConsentForRiskyApps** | Write | Boolean | Flag indicating if user consent will be blocked when a risky request is detected. Administrators will still be able to consent to apps considered risky. | |
 | **EnableAdminConsentRequests** | Write | Boolean | Flag indicating if users will be able to request admin consent when they are unable to grant consent to an app themselves. | |
 | **ConstrainGroupSpecificConsentToMembersOfGroupName** | Write | String | If EnableGroupSpecificConsent is set to âTrueâ and this is set to a security group name, members (both direct and transitive) of the group identified will be authorized to grant group-specific permissions to the groups they own. | |
-| **Ensure** | Write | String | Specify if the Azure AD Group Consent Settings should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Group Consent Settings should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials of the Admin | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |

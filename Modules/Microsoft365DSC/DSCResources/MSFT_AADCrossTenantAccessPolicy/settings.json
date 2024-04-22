@@ -1,6 +1,6 @@
 {
     "resourceName": "AADCrossTenantAccessPolicy",
-    "description": "This resource configures an Azure AD Cross Tenant Policy (XTAP).",
+    "description": "This resource configures an Entra ID Cross Tenant Policy (XTAP).",
     "roles": {
         "read": [
             "Global Reader"

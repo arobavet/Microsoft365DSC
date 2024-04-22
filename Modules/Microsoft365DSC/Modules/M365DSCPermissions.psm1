@@ -1206,7 +1206,7 @@ Connect-MgGraph -Scopes 'Application.ReadWrite.All'
 
 NOTE:
 If consent cannot be given for whatever reason, make sure all these permissions are
-given Admin Consent by browsing to the App Registration in Azure AD > API Permissions
+given Admin Consent by browsing to the App Registration in Entra ID > API Permissions
 and clicking the "Grant admin consent for <orgname>" button.
 
 More information:
@@ -1472,7 +1472,7 @@ function Update-M365DSCAzureAdApplication
     if (-not ($azureADApp = Get-MgApplication -Filter "DisplayName eq '$($ApplicationName)'" -ErrorAction SilentlyContinue))
     {
         $azureADApp = New-MgApplication -DisplayName $ApplicationName
-        Write-LogEntry "  New Azure AD application '$ApplicationName' created!"
+        Write-LogEntry "  New Entra ID application '$ApplicationName' created!"
         $requireWait = $true
     }
     else
@@ -1623,7 +1623,7 @@ function Update-M365DSCAzureAdApplication
                 }
                 catch
                 {
-                    Write-LogEntry '[ERROR] Error while providing consent to the requested permissions. Please make sure you provide consent via the Azure AD Admin Portal.' -Type Error
+                    Write-LogEntry '[ERROR] Error while providing consent to the requested permissions. Please make sure you provide consent via the Entra ID Admin Portal.' -Type Error
                     Write-LogEntry "Error details: $($_.Exception.Message)"
                 }
             }

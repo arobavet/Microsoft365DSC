@@ -2,4 +2,4 @@
 
 ## Description
 
-This resource configures the Azure AD Tenant Details
+This resource configures the Entra ID Tenant Details

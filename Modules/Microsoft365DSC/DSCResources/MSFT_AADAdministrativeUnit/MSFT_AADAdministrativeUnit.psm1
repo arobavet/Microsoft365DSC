@@ -117,7 +117,7 @@ function Get-TargetResource
 
         if ($null -eq $getValue -and -not [string]::IsNullOrEmpty($DisplayName))
         {
-            Write-Verbose -Message "Could not find an Azure AD Administrative Unit with Id {$Id}"
+            Write-Verbose -Message "Could not find an Entra ID Administrative Unit with Id {$Id}"
             if (-Not [string]::IsNullOrEmpty($DisplayName))
             {
                 if ($null -ne $Script:exportedInstances -and $Script:ExportMode)
@@ -133,11 +133,11 @@ function Get-TargetResource
         #endregion
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Azure AD Administrative Unit with DisplayName {$DisplayName}"
+            Write-Verbose -Message "Could not find an Entra ID Administrative Unit with DisplayName {$DisplayName}"
             return $nullResult
         }
         $Id = $getValue.Id
-        Write-Verbose -Message "An Azure AD Administrative Unit with Id {$Id} and DisplayName {$DisplayName} was found."
+        Write-Verbose -Message "An Entra ID Administrative Unit with Id {$Id} and DisplayName {$DisplayName} was found."
         $results = @{
             #region resource generator code
             Description           = $getValue.Description
@@ -475,7 +475,7 @@ function Set-TargetResource
                     $roleTemplate = Get-MgBetaDirectoryRoleTemplate -All -ErrorAction Stop | Where-Object { $_.DisplayName -eq $rolemember.RoleName }
                     if ($null -ne $roleTemplate)
                     {
-                        Write-Verbose -Message "Enable Azure AD role {$($rolemember.RoleName)} with id {$($roleTemplate.Id)}"
+                        Write-Verbose -Message "Enable Entra ID role {$($rolemember.RoleName)} with id {$($roleTemplate.Id)}"
                         $roleObject = New-MgBetaDirectoryRole -RoleTemplateId $roleTemplate.Id -ErrorAction Stop
                     }
                 }
@@ -533,7 +533,7 @@ function Set-TargetResource
 
     if ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Absent')
     {
-        Write-Verbose -Message "Creating an Azure AD Administrative Unit with DisplayName {$DisplayName}"
+        Write-Verbose -Message "Creating an Entra ID Administrative Unit with DisplayName {$DisplayName}"
 
         #region resource generator code
         Write-Verbose -Message "Creating new Administrative Unit with: $(Convert-M365DscHashtableToString -Hashtable $CreateParameters)"
@@ -568,7 +568,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Azure AD Administrative Unit with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Updating the Entra ID Administrative Unit with Id {$($currentInstance.Id)}"
 
         $UpdateParameters = ([Hashtable]$PSBoundParameters).clone()
         $UpdateParameters = Rename-M365DSCCimInstanceParameter -Properties $UpdateParameters
@@ -746,7 +746,7 @@ function Set-TargetResource
                     $roleObject = Get-MgBetaDirectoryRole -Filter "DisplayName eq '$($diff.RoleName)'"
                     if ($null -eq $roleObject)
                     {
-                        throw "AU {$DisplayName} Scoped Role {$($diff.RoleName)} does not exist as an Azure AD role"
+                        throw "AU {$DisplayName} Scoped Role {$($diff.RoleName)} does not exist as an Entra ID role"
                     }
                 }
                 if ($diff.SideIndicator -eq '=>')
@@ -874,7 +874,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Administrative Unit with Id {$Id} and DisplayName {$DisplayName}"
+    Write-Verbose -Message "Testing configuration of the Entra ID Administrative Unit with Id {$Id} and DisplayName {$DisplayName}"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

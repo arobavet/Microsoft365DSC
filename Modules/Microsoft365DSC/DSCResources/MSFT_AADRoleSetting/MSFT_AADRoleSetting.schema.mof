@@ -44,7 +44,7 @@ class MSFT_AADRoleSetting : OMI_BaseResource
     [Write, Description("Authorization context is required (True/False)")] Boolean AuthenticationContextRequired;
     [Write, Description("Descriptive name of associated authorization context")] String AuthenticationContextName;
     [Write, Description("Authorization context id")] String AuthenticationContextId;
-    [Write, Description("Specify if the Azure AD role setting should exist or not."), ValueMap{"Present"}, Values{"Present"}] String Ensure;
+    [Write, Description("Specify if the Entra ID role setting should exist or not."), ValueMap{"Present"}, Values{"Present"}] String Ensure;
     [Write, Description("Credentials for the Microsoft Graph delegated permissions."), EmbeddedInstance("MSFT_Credential")] string Credential;
     [Write, Description("Id of the Azure Active Directory application to authenticate with.")] String ApplicationId;
     [Write, Description("Id of the Azure Active Directory tenant used for authentication.")] String TenantId;

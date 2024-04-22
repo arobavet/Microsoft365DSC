@@ -29,21 +29,21 @@ class MSFT_AADCrossTenantAccessPolicyAutomaticUserConsentSettings
 [ClassVersion("1.0.0")]
 class MSFT_AADCrossTenantAccessPolicyInboundTrust
 {
-    [Write, Description("Specifies whether compliant devices from external Azure AD organizations are trusted.")] Boolean IsCompliantDeviceAccepted;
-    [Write, Description("Specifies whether hybrid Azure AD joined devices from external Azure AD organizations are trusted.")] Boolean IsHybridAzureADJoinedDeviceAccepted;
-    [Write, Description("Specifies whether MFA from external Azure AD organizations is trusted.")] Boolean IsMfaAccepted;
+    [Write, Description("Specifies whether compliant devices from external Entra ID organizations are trusted.")] Boolean IsCompliantDeviceAccepted;
+    [Write, Description("Specifies whether hybrid Entra ID joined devices from external Entra ID organizations are trusted.")] Boolean IsHybridAzureADJoinedDeviceAccepted;
+    [Write, Description("Specifies whether MFA from external Entra ID organizations is trusted.")] Boolean IsMfaAccepted;
 };
 
 [ClassVersion("1.0.0.0"), FriendlyName("AADCrossTenantAccessPolicyConfigurationPartner")]
 class MSFT_AADCrossTenantAccessPolicyConfigurationPartner : OMI_BaseResource
 {
     [Key, Description("The tenant identifier for the partner Azure Active Directory (Azure AD) organization.")] String PartnerTenantId;
-    [Write, Description("Defines your partner-specific configuration for users from other organizations accessing your resources via Azure AD B2B collaboration."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BCollaborationInbound;
-    [Write, Description("Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Azure AD B2B collaboration."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BCollaborationOutbound;
-    [Write, Description("Defines your partner-specific configuration for users from other organizations accessing your resources via Azure AD B2B direct connect."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BDirectConnectInbound;
-    [Write, Description("Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Azure AD B2B direct connect."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BDirectConnectOutbound;
+    [Write, Description("Defines your partner-specific configuration for users from other organizations accessing your resources via Entra ID B2B collaboration."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BCollaborationInbound;
+    [Write, Description("Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Entra ID B2B collaboration."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BCollaborationOutbound;
+    [Write, Description("Defines your partner-specific configuration for users from other organizations accessing your resources via Entra ID B2B direct connect."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BDirectConnectInbound;
+    [Write, Description("Defines your partner-specific configuration for users in your organization going outbound to access resources in another organization via Entra ID B2B direct connect."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyB2BSetting")] String B2BDirectConnectOutbound;
     [Write, Description("Determines the partner-specific configuration for accepting trust claims from other tenant invitations."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyAutomaticUserConsentSettings")] String AutomaticUserConsentSettings;
-    [Write, Description("Determines the partner-specific configuration for trusting other Conditional Access claims from external Azure AD organizations."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyInboundTrust")] String InboundTrust;
+    [Write, Description("Determines the partner-specific configuration for trusting other Conditional Access claims from external Entra ID organizations."), EmbeddedInstance("MSFT_AADCrossTenantAccessPolicyInboundTrust")] String InboundTrust;
     [Write, Description("Specify if the policy should exist or not."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
     [Write, Description("Credentials of the Admin"), EmbeddedInstance("MSFT_Credential")] string Credential;
     [Write, Description("Id of the Azure Active Directory application to authenticate with.")] String ApplicationId;

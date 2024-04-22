@@ -72,7 +72,7 @@ function Get-TargetResource
 
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Azure AD Cross Tenant Access Policy with name {$DisplayName}"
+            Write-Verbose -Message "Could not find an Entra ID Cross Tenant Access Policy with name {$DisplayName}"
             return $nullResult
         }
 
@@ -172,7 +172,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Azure AD Cross Tenant Access Policy"
+        Write-Verbose -Message "Updating the Entra ID Cross Tenant Access Policy"
         $UpdateParams = @{}
         if (-not [System.String]::IsNullOrEmpty($DisplayName))
         {
@@ -252,7 +252,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Cross Tenant Access Policy with name [$DisplayName]"
+    Write-Verbose -Message "Testing configuration of the Entra ID Cross Tenant Access Policy with name [$DisplayName]"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

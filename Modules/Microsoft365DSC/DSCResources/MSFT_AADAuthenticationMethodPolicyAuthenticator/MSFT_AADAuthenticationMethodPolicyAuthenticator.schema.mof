@@ -11,7 +11,7 @@ class MSFT_MicrosoftGraphAuthenticationMethodFeatureConfiguration
 {
     [Write, Description("A single entity that's excluded from using this feature."), EmbeddedInstance("MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget")] String ExcludeTarget;
     [Write, Description("A single entity that's allowed to use this feature."), EmbeddedInstance("MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget")] String IncludeTarget;
-    [Write, Description("Enable or disable the feature. Possible values are: default, enabled, disabled, unknownFutureValue. The default value is used when the configuration hasn't been explicitly set and uses the default behavior of Azure AD for the setting. The default value is disabled."), ValueMap{"default","enabled","disabled","unknownFutureValue"}, Values{"default","enabled","disabled","unknownFutureValue"}] String State;
+    [Write, Description("Enable or disable the feature. Possible values are: default, enabled, disabled, unknownFutureValue. The default value is used when the configuration hasn't been explicitly set and uses the default behavior of Entra ID for the setting. The default value is disabled."), ValueMap{"default","enabled","disabled","unknownFutureValue"}, Values{"default","enabled","disabled","unknownFutureValue"}] String State;
 };
 [ClassVersion("1.0.0")]
 class MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget
@@ -22,13 +22,13 @@ class MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget
 [ClassVersion("1.0.0")]
 class MSFT_AADAuthenticationMethodPolicyAuthenticatorExcludeTarget
 {
-    [Write, Description("The object identifier of an Azure AD group.")] String Id;
+    [Write, Description("The object identifier of an Entra ID group.")] String Id;
     [Write, Description("The type of the authentication method target. Possible values are: group and unknownFutureValue."), ValueMap{"user","group","unknownFutureValue"}, Values{"user","group","unknownFutureValue"}] String TargetType;
 };
 [ClassVersion("1.0.0")]
 class MSFT_AADAuthenticationMethodPolicyAuthenticatorIncludeTarget
 {
-    [Write, Description("The object identifier of an Azure AD group.")] String Id;
+    [Write, Description("The object identifier of an Entra ID group.")] String Id;
     [Write, Description("The type of the authentication method target. Possible values are: group and unknownFutureValue."), ValueMap{"user","group","unknownFutureValue"}, Values{"user","group","unknownFutureValue"}] String TargetType;
 };
 

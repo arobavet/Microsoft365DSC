@@ -2,4 +2,4 @@
 
 ## Description
 
-This resource configures the Azure AD Named Location Policies in Azure Active Directory
+This resource configures the Entra ID Named Location Policies in Azure Active Directory

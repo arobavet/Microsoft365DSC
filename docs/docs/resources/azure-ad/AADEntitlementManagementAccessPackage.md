@@ -35,7 +35,7 @@
 
 ## Description
 
-This resource configures an Azure AD Entitlement Management Access Package.
+This resource configures an Entra ID Entitlement Management Access Package.
 
 ## Permissions
 

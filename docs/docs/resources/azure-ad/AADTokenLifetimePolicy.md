@@ -9,7 +9,7 @@
 | **Description** | Write | String | Description of the Policy. | |
 | **Definition** | Write | StringArray[] | Definition of the Policy. | |
 | **IsOrganizationDefault** | Write | Boolean | IsOrganizationDefault of the Policy. | |
-| **Ensure** | Write | String | Specify if the Azure AD Policy should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Policy should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |
@@ -19,7 +19,7 @@
 
 ## Description
 
-This resource configures the Azure AD Token Lifetime Policies
+This resource configures the Entra ID Token Lifetime Policies
 
 ## Permissions
 

@@ -3,4 +3,4 @@
 
 ## Description
 
-This resource manages Azure AD Cross Tenant Access Policies Configuration Default.
+This resource manages Entra ID Cross Tenant Access Policies Configuration Default.

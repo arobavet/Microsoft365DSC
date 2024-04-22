@@ -37,7 +37,7 @@
 | --- | --- | --- | --- | --- |
 | **ExcludeTarget** | Write | MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget | A single entity that's excluded from using this feature. | |
 | **IncludeTarget** | Write | MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget | A single entity that's allowed to use this feature. | |
-| **State** | Write | String | Enable or disable the feature. Possible values are: default, enabled, disabled, unknownFutureValue. The default value is used when the configuration hasn't been explicitly set and uses the default behavior of Azure AD for the setting. The default value is disabled. | `default`, `enabled`, `disabled`, `unknownFutureValue` |
+| **State** | Write | String | Enable or disable the feature. Possible values are: default, enabled, disabled, unknownFutureValue. The default value is used when the configuration hasn't been explicitly set and uses the default behavior of Entra ID for the setting. The default value is disabled. | `default`, `enabled`, `disabled`, `unknownFutureValue` |
 
 ### MSFT_AADAuthenticationMethodPolicyAuthenticatorFeatureTarget
 
@@ -54,7 +54,7 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **Id** | Write | String | The object identifier of an Azure AD group. | |
+| **Id** | Write | String | The object identifier of an Entra ID group. | |
 | **TargetType** | Write | String | The type of the authentication method target. Possible values are: group and unknownFutureValue. | `user`, `group`, `unknownFutureValue` |
 
 ### MSFT_AADAuthenticationMethodPolicyAuthenticatorIncludeTarget
@@ -63,7 +63,7 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **Id** | Write | String | The object identifier of an Azure AD group. | |
+| **Id** | Write | String | The object identifier of an Entra ID group. | |
 | **TargetType** | Write | String | The type of the authentication method target. Possible values are: group and unknownFutureValue. | `user`, `group`, `unknownFutureValue` |
 
 

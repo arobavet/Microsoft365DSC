@@ -66,7 +66,7 @@ function Get-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Getting configuration of Azure AD role definition'
+    Write-Verbose -Message 'Getting configuration of Entra ID role definition'
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
 
@@ -221,7 +221,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD role definition'
+    Write-Verbose -Message 'Setting configuration of Entra ID role definition'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies

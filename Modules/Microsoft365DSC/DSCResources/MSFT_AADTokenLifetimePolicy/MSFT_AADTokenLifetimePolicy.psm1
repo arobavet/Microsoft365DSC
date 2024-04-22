@@ -193,7 +193,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD Policy'
+    Write-Verbose -Message 'Setting configuration of Entra ID Policy'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies

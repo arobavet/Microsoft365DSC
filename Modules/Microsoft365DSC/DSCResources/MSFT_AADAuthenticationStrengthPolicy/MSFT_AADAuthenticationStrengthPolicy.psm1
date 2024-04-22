@@ -186,26 +186,26 @@ function Set-TargetResource
 
     if ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Absent')
     {
-        Write-Verbose -Message "Creating new Azure AD AuthenticationStrengthPolicy {$DisplayName}"
+        Write-Verbose -Message "Creating new Entra ID AuthenticationStrengthPolicy {$DisplayName}"
         $BoundParameters.Remove("Id") | Out-Null
         New-MgBetaPolicyAuthenticationStrengthPolicy @BoundParameters
     }
     elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Azure AD Authentication Strength Policy with DisplayName {$DisplayName}"
+        Write-Verbose -Message "Updating the Entra ID Authentication Strength Policy with DisplayName {$DisplayName}"
         $BoundParameters.Add("AuthenticationStrengthPolicyId", $currentInstance.Id)
         $BoundParameters.Remove("Id") | Out-Null
         $combinations = $BoundParameters.AllowedCombinations
         $BoundParameters.Remove("AllowedCombinations") | Out-Null
         Update-MgBetaPolicyAuthenticationStrengthPolicy @BoundParameters
 
-        Write-Verbose -Message "Updating the Azure AD Authentication Strength Policy allowed combination with DisplayName {$DisplayName}"
+        Write-Verbose -Message "Updating the Entra ID Authentication Strength Policy allowed combination with DisplayName {$DisplayName}"
         Update-MgBetaPolicyAuthenticationStrengthPolicyAllowedCombination -AuthenticationStrengthPolicyId $currentInstance.Id `
             -AllowedCombinations $AllowedCombinations
     }
     elseif ($Ensure -eq 'Absent' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Removing the Azure AD Authentication Method Policy with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Removing the Entra ID Authentication Method Policy with Id {$($currentInstance.Id)}"
         Remove-MgBetaPolicyAuthenticationStrengthPolicy -AuthenticationStrengthPolicyId $currentInstance.Id
     }
 }
@@ -275,7 +275,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Authentication Strength Policy with Id {$Id} and DisplayName {$DisplayName}"
+    Write-Verbose -Message "Testing configuration of the Entra ID Authentication Strength Policy with Id {$Id} and DisplayName {$DisplayName}"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

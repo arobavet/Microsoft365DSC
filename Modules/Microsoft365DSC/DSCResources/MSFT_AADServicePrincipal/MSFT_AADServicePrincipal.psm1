@@ -98,7 +98,7 @@ function Get-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Getting configuration of Azure AD ServicePrincipal'
+    Write-Verbose -Message 'Getting configuration of Entra ID ServicePrincipal'
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
 
@@ -337,7 +337,7 @@ function Set-TargetResource
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
 
-    Write-Verbose -Message 'Setting configuration of Azure AD ServicePrincipal'
+    Write-Verbose -Message 'Setting configuration of Entra ID ServicePrincipal'
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
 
@@ -599,7 +599,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message 'Testing configuration of Azure AD ServicePrincipal'
+    Write-Verbose -Message 'Testing configuration of Entra ID ServicePrincipal'
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
 

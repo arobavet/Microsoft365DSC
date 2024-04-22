@@ -1,6 +1,6 @@
 ﻿{
     "resourceName": "AADTenantDetails",
-    "description": "This resource configures the Azure AD Tenant Details.",
+    "description": "This resource configures the Entra ID Tenant Details.",
     "roles": {
         "read": [],
         "update": [

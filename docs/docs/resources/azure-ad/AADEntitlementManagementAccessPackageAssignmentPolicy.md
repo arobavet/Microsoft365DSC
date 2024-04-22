@@ -143,7 +143,7 @@
 
 ## Description
 
-This resource configures an Azure AD Entitlement Management Access Package Assignment Policy.
+This resource configures an Entra ID Entitlement Management Access Package Assignment Policy.
 
 ## Permissions
 

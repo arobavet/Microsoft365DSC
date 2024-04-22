@@ -11,14 +11,14 @@
 | **Description** | Write | String | A free text field to provide a description of the application object to end users. The maximum allowed size is 1024 characters. | |
 | **GroupMembershipClaims** | Write | String | A bitmask that configures the groups claim issued in a user or OAuth 2.0 access token that the application expects. | |
 | **Homepage** | Write | String | The URL to the application's homepage. | |
-| **IdentifierUris** | Write | StringArray[] | User-defined URI(s) that uniquely identify a Web application within its Azure AD tenant, or within a verified custom domain. | |
+| **IdentifierUris** | Write | StringArray[] | User-defined URI(s) that uniquely identify a Web application within its Entra ID tenant, or within a verified custom domain. | |
 | **IsFallbackPublicClient** | Write | Boolean | Specifies the fallback application type as public client, such as an installed application running on a mobile device. The default value is false, which means the fallback application type is confidential client such as web app. There are certain scenarios where Microsoft Entra ID cannot determine the client application type (for example, ROPC flow where it is configured without specifying a redirect URI). In those cases, Microsoft Entra ID will interpret the application type based on the value of this property. | |
 | **KnownClientApplications** | Write | StringArray[] | Client applications that are tied to this resource application. | |
 | **LogoutURL** | Write | String | The logout url for this application. | |
 | **PublicClient** | Write | Boolean | Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false. | |
 | **ReplyURLs** | Write | StringArray[] | Specifies the URLs that user tokens are sent to for sign in, or the redirect URIs that OAuth 2.0 authorization codes and access tokens are sent to. | |
 | **Owners** | Write | StringArray[] | UPN or ObjectID values of the app's owners. | |
-| **Ensure** | Write | String | Specify if the Azure AD App should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID App should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **ApplicationSecret** | Write | PSCredential | Secret of the Azure Active Directory application to authenticate with. | |

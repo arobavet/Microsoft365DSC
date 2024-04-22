@@ -3,4 +3,4 @@
 
 ## Description
 
-This resource configures an Azure AD Administrative Unit.
+This resource configures an Entra ID Administrative Unit.

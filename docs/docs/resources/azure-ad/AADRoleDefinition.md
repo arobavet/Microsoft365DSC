@@ -12,8 +12,8 @@
 | **RolePermissions** | Required | StringArray[] | Specifies permissions for the role definition. | |
 | **TemplateId** | Write | String | Specifies template id for the role definition. | |
 | **Version** | Write | String | Specifies version for the role definition. | |
-| **Ensure** | Write | String | Specify if the Azure AD Role definition should exist or not. | `Present`, `Absent` |
-| **Credential** | Write | PSCredential | Credentials of the Azure AD Admin | |
+| **Ensure** | Write | String | Specify if the Entra ID Role definition should exist or not. | `Present`, `Absent` |
+| **Credential** | Write | PSCredential | Credentials of the Entra ID Admin | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |
 | **ApplicationSecret** | Write | PSCredential | Secret of the Azure Active Directory application to authenticate with. | |
@@ -23,7 +23,7 @@
 ## Description
 
 This resource configures an Azure Active Directory role definition.
-To configure custom roles you require an Azure AD Premium P1 license.
+To configure custom roles you require an Entra ID Premium P1 license.
 The account used to configure role definitions based on this resource needs either to be a
 "Global Administrator" or a "Privileged role administrator".
 

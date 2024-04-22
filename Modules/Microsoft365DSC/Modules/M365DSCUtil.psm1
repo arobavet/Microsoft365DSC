@@ -2169,7 +2169,7 @@ function Get-SPOAdministrationUrl
     {
         $UseMFASwitch = @{ }
     }
-    Write-Verbose -Message 'Connection to Azure AD is required to automatically determine SharePoint Online admin URL...'
+    Write-Verbose -Message 'Connection to Entra ID is required to automatically determine SharePoint Online admin URL...'
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
     Write-Verbose -Message 'Getting SharePoint Online admin URL...'
@@ -2217,7 +2217,7 @@ function Get-M365TenantName
     {
         $UseMFASwitch = @{ }
     }
-    Write-Verbose -Message 'Connection to Azure AD is required to automatically determine SharePoint Online admin URL...'
+    Write-Verbose -Message 'Connection to Entra ID is required to automatically determine SharePoint Online admin URL...'
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
     Write-Verbose -Message 'Getting SharePoint Online admin URL...'

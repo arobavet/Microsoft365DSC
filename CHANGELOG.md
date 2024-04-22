@@ -3462,7 +3462,7 @@ MISC
   * Updated MSCloudLoginAssistant to version 1.0.72;
 * MISC
   * Renamed the GlobalAdminAccount parameter to Credential across all resources;
-  * Revamped entire Azure AD Workload to leverage Microsoft Graph;
+  * Revamped entire Entra ID Workload to leverage Microsoft Graph;
   * New -LaunchWebUI switch for Export-M365DSCConfiguration will launch the
     new web-based UI. The old GUI has been removed.
   * Removal of the -Quiet switch for the Export-M365DSCConfiguration cmdlet;
@@ -4180,7 +4180,7 @@ MISC
     properties;
 * TeamsChannel
   * Fixed an error in the Export when trying to connect using
-    only an Azure AD Application without any credentials
+    only an Entra ID Application without any credentials
     (Issue #754);
 * TeamsClientConfiguration
   * Added support for the AllowEgnyte property

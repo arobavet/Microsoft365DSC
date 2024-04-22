@@ -2,4 +2,4 @@
 
 ## Description
 
-This resource configures the Azure AD Token Lifetime Policies
+This resource configures the Entra ID Token Lifetime Policies

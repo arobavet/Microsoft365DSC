@@ -1,6 +1,6 @@
 {
     "resourceName": "AADAuthenticationStrengthPolicy",
-    "description": "This resource configures an Azure AD Authentication Strength Policy.",
+    "description": "This resource configures an Entra ID Authentication Strength Policy.",
     "roles": {
         "read": [],
         "update": [

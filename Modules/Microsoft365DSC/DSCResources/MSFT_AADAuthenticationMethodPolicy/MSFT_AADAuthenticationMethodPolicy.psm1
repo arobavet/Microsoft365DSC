@@ -98,7 +98,7 @@ function Get-TargetResource
 
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Azure AD Authentication Method Policy with Id {$Id}"
+            Write-Verbose -Message "Could not find an Entra ID Authentication Method Policy with Id {$Id}"
 
             if (-Not [string]::IsNullOrEmpty($DisplayName))
             {
@@ -113,11 +113,11 @@ function Get-TargetResource
         #endregion
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Azure AD Authentication Method Policy with DisplayName {$DisplayName}"
+            Write-Verbose -Message "Could not find an Entra ID Authentication Method Policy with DisplayName {$DisplayName}"
             return $nullResult
         }
         $Id = $getValue.Id
-        Write-Verbose -Message "An Azure AD Authentication Method Policy with Id {$Id} and DisplayName {$DisplayName} was found."
+        Write-Verbose -Message "An Entra ID Authentication Method Policy with Id {$Id} and DisplayName {$DisplayName} was found."
 
         #region resource generator code
         $complexRegistrationEnforcement = @{}
@@ -343,7 +343,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Azure AD Authentication Method Policy with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Updating the Entra ID Authentication Method Policy with Id {$($currentInstance.Id)}"
 
         $UpdateParameters = ([Hashtable]$BoundParameters).clone()
         $UpdateParameters = Rename-M365DSCCimInstanceParameter -Properties $UpdateParameters
@@ -448,7 +448,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Authentication Method Policy with Id {$Id} and DisplayName {$DisplayName}"
+    Write-Verbose -Message "Testing configuration of the Entra ID Authentication Method Policy with Id {$Id} and DisplayName {$DisplayName}"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

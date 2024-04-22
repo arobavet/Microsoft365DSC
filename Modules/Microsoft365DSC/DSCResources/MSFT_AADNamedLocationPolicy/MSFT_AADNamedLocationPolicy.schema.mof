@@ -9,7 +9,7 @@ class MSFT_AADNamedLocationPolicy : OMI_BaseResource
     [Write, Description("Specifies the countries and regions for the Named Location in Azure Active Directory")] String CountriesAndRegions[];
     [Write, Description("Determines what method is used to decide which country the user is located in. Possible values are clientIpAddress(default) and authenticatorAppGps."), ValueMap{"clientIpAddress","authenticatorAppGps"}, Values{"clientIpAddress","authenticatorAppGps"}] String CountryLookupMethod;
     [Write, Description("Specifies the includeUnknownCountriesAndRegions value for the Named Location in Azure Active Directory")] Boolean IncludeUnknownCountriesAndRegions;
-    [Write, Description("Specify if the Azure AD Named Location should exist or not."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
+    [Write, Description("Specify if the Entra ID Named Location should exist or not."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
     [Write, Description("Credentials for the Microsoft Graph delegated permissions."), EmbeddedInstance("MSFT_Credential")] string Credential;
     [Write, Description("Id of the Azure Active Directory application to authenticate with.")] String ApplicationId;
     [Write, Description("Id of the Azure Active Directory tenant used for authentication.")] String TenantId;

@@ -67,7 +67,7 @@ It is important to understand that the resulting file that contains the captured
   <figcaption>Example of an Exported configuration with credential</figcaption>
 </figure>
 
-In comparison, if you used a Service Principal to do the export, the resulting file will implement logic to receive information about the Azure AD application instance to use and every component defined within the file will as well.
+In comparison, if you used a Service Principal to do the export, the resulting file will implement logic to receive information about the Entra ID application instance to use and every component defined within the file will as well.
 
 <figure markdown>
   ![Example of an Exported configuration with service principal](../../Images/ExportedConfigWithServicePrincipal.png)
@@ -133,7 +133,7 @@ Omitting to specify this parameter will name the resulting file as M365TenantCon
 
 ### Filters
 
-This allows you to specify a filter at the resource level to reduce the overall instances that are being extracted. As an example, if you are only interested in extracting Azure AD Groups that have their display name start with the word 'Microsoft', you could specify the following filters:
+This allows you to specify a filter at the resource level to reduce the overall instances that are being extracted. As an example, if you are only interested in extracting Entra ID Groups that have their display name start with the word 'Microsoft', you could specify the following filters:
 
 ```
 $Filters = @{

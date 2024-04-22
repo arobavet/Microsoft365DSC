@@ -1,6 +1,6 @@
 ﻿{
     "resourceName": "AADTokenLifetimePolicy",
-    "description": "This resource configures the Azure AD Token Lifetime Policies.",
+    "description": "This resource configures the Entra ID Token Lifetime Policies.",
     "roles": {
         "read": [],
         "update": [

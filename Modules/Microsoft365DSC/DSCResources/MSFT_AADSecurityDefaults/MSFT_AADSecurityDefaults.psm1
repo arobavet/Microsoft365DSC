@@ -51,7 +51,7 @@ function Get-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Getting configuration for Azure AD Security Defaults'
+    Write-Verbose -Message 'Getting configuration for Entra ID Security Defaults'
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
 
@@ -152,7 +152,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration for Azure AD Security Defaults'
+    Write-Verbose -Message 'Setting configuration for Entra ID Security Defaults'
     $CurrentValues = Get-TargetResource @PSBoundParameters
 
     #Ensure the proper dependencies are installed in the current environment.
@@ -249,7 +249,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message 'Testing configuration of the Azure AD Security Defaults'
+    Write-Verbose -Message 'Testing configuration of the Entra ID Security Defaults'
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
 

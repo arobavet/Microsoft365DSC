@@ -96,7 +96,7 @@ function Get-TargetResource
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters
 
-    Write-Verbose -Message 'Getting configuration of Azure AD Application'
+    Write-Verbose -Message 'Getting configuration of Entra ID Application'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
@@ -136,7 +136,7 @@ function Get-TargetResource
 
         if ($null -eq $AADApp)
         {
-            Write-Verbose -Message "Attempting to retrieve Azure AD Application by DisplayName {$DisplayName}"
+            Write-Verbose -Message "Attempting to retrieve Entra ID Application by DisplayName {$DisplayName}"
 
             if ($null -ne $Script:exportedInstances -and $Script:ExportMode)
             {
@@ -153,12 +153,12 @@ function Get-TargetResource
         }
         elseif ($null -eq $AADApp)
         {
-            Write-Verbose -Message 'Could not retrieve and instance of the Azure AD App in the Get-TargetResource function.'
+            Write-Verbose -Message 'Could not retrieve and instance of the Entra ID App in the Get-TargetResource function.'
             return $nullReturn
         }
         else
         {
-            Write-Verbose -Message 'An instance of Azure AD App was retrieved.'
+            Write-Verbose -Message 'An instance of Entra ID App was retrieved.'
             $permissionsObj = Get-M365DSCAzureADAppPermissions -App $AADApp
             $isPublicClient = $false
             if (-not [System.String]::IsNullOrEmpty($AADApp.PublicClient) -and $AADApp.PublicClient -eq $true)
@@ -333,7 +333,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD Application'
+    Write-Verbose -Message 'Setting configuration of Entra ID Application'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
@@ -594,7 +594,7 @@ function Set-TargetResource
 
     if ($needToUpdatePermissions -and -not [System.String]::IsNullOrEmpty($Permissions) -and $Permissions.Length -gt 0)
     {
-        Write-Verbose -Message "Will update permissions for Azure AD Application {$($currentAADApp.DisplayName)}"
+        Write-Verbose -Message "Will update permissions for Entra ID Application {$($currentAADApp.DisplayName)}"
         $allSourceAPIs = $Permissions.SourceAPI | Get-Unique
         $allRequiredAccess = @()
 
@@ -661,7 +661,7 @@ function Set-TargetResource
             }
         }
 
-        Write-Verbose -Message "Updating permissions for Azure AD Application {$($currentAADApp.DisplayName)} with RequiredResourceAccess:`r`n$($allRequiredAccess | Out-String)"
+        Write-Verbose -Message "Updating permissions for Entra ID Application {$($currentAADApp.DisplayName)} with RequiredResourceAccess:`r`n$($allRequiredAccess | Out-String)"
         Write-Verbose -Message "Current App Id: $($currentAADApp.AppId)"
 
         # Even if the property is named ApplicationId, we need to pass in the ObjectId
@@ -795,7 +795,7 @@ function Test-TargetResource
         }
         else
         {
-            Write-Verbose -Message 'Permissions for Azure AD Application are the same'
+            Write-Verbose -Message 'Permissions for Entra ID Application are the same'
         }
     }
     else
@@ -803,7 +803,7 @@ function Test-TargetResource
         $driftedParams = @{}
         if ($Permissions.Length -gt 0)
         {
-            Write-Verbose -Message 'No Permissions exist for the current Azure AD App, but permissions were specified for desired state'
+            Write-Verbose -Message 'No Permissions exist for the current Entra ID App, but permissions were specified for desired state'
             Write-Verbose -Message "Test-TargetResource returned $false"
 
             $EventValue = "<CurrentValue>`$null</CurrentValue>"
@@ -812,7 +812,7 @@ function Test-TargetResource
         }
         else
         {
-            Write-Verbose -Message 'No Permissions exist for the current Azure AD App and no permissions were specified'
+            Write-Verbose -Message 'No Permissions exist for the current Entra ID App and no permissions were specified'
         }
     }
     Write-Verbose -Message "Current Values: $(Convert-M365DscHashtableToString -Hashtable $CurrentValues)"
@@ -970,7 +970,7 @@ function Get-M365DSCAzureADAppPermissions
         [Parameter(Mandatory = $true)]
         $App
     )
-    Write-Verbose -Message "Retrieving permissions for Azure AD Application {$($App.DisplayName)}"
+    Write-Verbose -Message "Retrieving permissions for Entra ID Application {$($App.DisplayName)}"
     [array]$requiredAccesses = $App.RequiredResourceAccess
 
     $permissions = @()

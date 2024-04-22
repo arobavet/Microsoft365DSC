@@ -177,7 +177,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD Groups Settings'
+    Write-Verbose -Message 'Setting configuration of Entra ID Groups Settings'
 
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies

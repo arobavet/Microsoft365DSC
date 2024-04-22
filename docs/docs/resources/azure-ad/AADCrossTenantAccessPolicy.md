@@ -18,7 +18,7 @@
 
 ## Description
 
-This resource manages Azure AD Cross Tenant Access Policies.
+This resource manages Entra ID Cross Tenant Access Policies.
 
 ## Permissions
 

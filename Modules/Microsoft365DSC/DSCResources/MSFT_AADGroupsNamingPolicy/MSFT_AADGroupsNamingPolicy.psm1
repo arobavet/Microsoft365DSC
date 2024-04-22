@@ -156,7 +156,7 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
-    Write-Verbose -Message 'Setting configuration of Azure AD Groups Naming Policy'
+    Write-Verbose -Message 'Setting configuration of Entra ID Groups Naming Policy'
 
     $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
         -InboundParameters $PSBoundParameters

@@ -3,4 +3,4 @@
 
 ## Description
 
-This resource configures an Azure AD Entitlement Management Access Package Catalog Resource.
+This resource configures an Entra ID Entitlement Management Access Package Catalog Resource.

@@ -7,7 +7,7 @@
 | **IsSingleInstance** | Key | String | Only valid value is 'Yes'. | `Yes` |
 | **PrefixSuffixNamingRequirement** | Write | String | Prefixes and suffixes to add to the group name. | |
 | **CustomBlockedWordsList** | Write | StringArray[] | Comma delimited list of words that should be blocked from being included in groups' names. | |
-| **Ensure** | Write | String | Specify if the Azure AD Groups Naming Policy should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Groups Naming Policy should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |

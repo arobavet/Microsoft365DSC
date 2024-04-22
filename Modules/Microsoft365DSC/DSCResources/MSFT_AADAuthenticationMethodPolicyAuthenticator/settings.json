@@ -1,6 +1,6 @@
 {
     "resourceName": "AADAuthenticationMethodPolicyAuthenticator",
-    "description": "This resource configures an Azure AD Authentication Method Policy Authenticator.",
+    "description": "This resource configures an Entra ID Authentication Method Policy Authenticator.",
     "roles": {
         "read": [
             "Security Reader"

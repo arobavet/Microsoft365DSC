@@ -833,7 +833,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of Azure AD User $UserPrincipalName"
+    Write-Verbose -Message "Testing configuration of Entra ID User $UserPrincipalName"
     $CurrentValues = Get-TargetResource @PSBoundParameters
 
     Write-Verbose -Message "Current Values: $(Convert-M365DscHashtableToString -Hashtable $CurrentValues)"

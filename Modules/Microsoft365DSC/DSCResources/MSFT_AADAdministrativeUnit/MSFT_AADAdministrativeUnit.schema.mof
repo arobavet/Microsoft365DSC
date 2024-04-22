@@ -7,7 +7,7 @@ class MSFT_MicrosoftGraphMember
 [ClassVersion("1.0.0")]
 class MSFT_MicrosoftGraphScopedRoleMembership
 {
-    [Write, Description("Name of the Azure AD Role that is assigned. See https://learn.microsoft.com/en-us/azure/active-directory/roles/admin-units-assign-roles#roles-that-can-be-assigned-with-administrative-unit-scope")] String RoleName;
+    [Write, Description("Name of the Entra ID Role that is assigned. See https://learn.microsoft.com/en-us/azure/active-directory/roles/admin-units-assign-roles#roles-that-can-be-assigned-with-administrative-unit-scope")] String RoleName;
     [Write, Description("Member that is assigned the scoped role. Note: Any groups must be role-enabled"), EmbeddedInstance("MSFT_MicrosoftGraphMember")] String RoleMemberInfo;
 };
 

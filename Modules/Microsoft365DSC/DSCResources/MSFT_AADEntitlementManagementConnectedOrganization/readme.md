@@ -3,4 +3,4 @@
 
 ## Description
 
-This resource configures an Azure AD Entitlement Management Connected Organization.
+This resource configures an Entra ID Entitlement Management Connected Organization.

@@ -12,7 +12,7 @@
 | **Attributes** | Write | MSFT_MicrosoftGraphaccesspackageresourceattribute[] | Contains information about the attributes to be collected from the requestor and sent to the resource application. | |
 | **Description** | Write | String | A description for the resource. | |
 | **IsPendingOnboarding** | Write | Boolean | True if the resource is not yet available for assignment. Read-only. | |
-| **OriginId** | Write | String | The unique identifier of the resource in the origin system. In the case of an Azure AD group, this is the identifier of the group. | |
+| **OriginId** | Write | String | The unique identifier of the resource in the origin system. In the case of an Entra ID group, this is the identifier of the group. | |
 | **OriginSystem** | Write | String | The type of the resource in the origin system. | |
 | **ResourceType** | Write | String | The type of the resource. | |
 | **Url** | Write | String | A unique resource locator for the resource, such as the URL for signing a user into an application. | |
@@ -100,7 +100,7 @@
 
 ## Description
 
-This resource configures an Azure AD Entitlement Management Access Package Catalog Resource.
+This resource configures an Entra ID Entitlement Management Access Package Catalog Resource.
 
 ## Permissions
 

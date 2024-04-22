@@ -115,7 +115,7 @@ function Get-TargetResource
 
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with Id {$Id}"
+            Write-Verbose -Message "Could not find an Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with Id {$Id}"
 
             if (-Not [string]::IsNullOrEmpty($DisplayName))
             {
@@ -127,11 +127,11 @@ function Get-TargetResource
         #endregion
         if ($null -eq $getValue)
         {
-            Write-Verbose -Message "Could not find an Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with DisplayName {$DisplayName}"
+            Write-Verbose -Message "Could not find an Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with DisplayName {$DisplayName}"
             return $nullResult
         }
         $Id = $getValue.Id
-        Write-Verbose -Message "An Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with Id {$Id} and DisplayName {$DisplayName} was found."
+        Write-Verbose -Message "An Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with Id {$Id} and DisplayName {$DisplayName} was found."
 
         #region resource generator code
         $complexEnrollmentStatusScreenSettings = @{}
@@ -326,7 +326,7 @@ function Set-TargetResource
 
     if ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Absent')
     {
-        Write-Verbose -Message "Creating an Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with DisplayName {$DisplayName}"
+        Write-Verbose -Message "Creating an Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with DisplayName {$DisplayName}"
         $PSBoundParameters.Remove('Assignments') | Out-Null
 
         $CreateParameters = ([Hashtable]$PSBoundParameters).clone()
@@ -361,7 +361,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Updating the Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with Id {$($currentInstance.Id)}"
         $PSBoundParameters.Remove('Assignments') | Out-Null
 
         $UpdateParameters = ([Hashtable]$PSBoundParameters).clone()
@@ -417,7 +417,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Absent' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Removing the Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Removing the Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with Id {$($currentInstance.Id)}"
         $currentAssignments = Get-MgBetaDeviceManagementWindowsAutopilotDeploymentProfileAssignment -WindowsAutopilotDeploymentProfileId $currentInstance.Id -All
         foreach ($assignment in $currentAssignments)
         {
@@ -534,7 +534,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Intune Windows Autopilot Deployment Profile Azure AD Hybrid Joined with Id {$Id} and DisplayName {$DisplayName}"
+    Write-Verbose -Message "Testing configuration of the Intune Windows Autopilot Deployment Profile Entra ID Hybrid Joined with Id {$Id} and DisplayName {$DisplayName}"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()

@@ -66,7 +66,7 @@ function Get-TargetResource
         $AllGroups = Get-MgGroup -GroupId $OwnerGroup -ErrorAction 'SilentlyContinue'
         if ($AllGroups -eq $null)
         {
-            Write-Verbose -Message "Could not get Azure AD Group {$OwnerGroup} by ID. `
+            Write-Verbose -Message "Could not get Entra ID Group {$OwnerGroup} by ID. `
                 Trying by Name."
             [Array]$AllGroups = Get-MgGroup -Search $OwnerGroup
         }
@@ -78,7 +78,7 @@ function Get-TargetResource
 
         if ($AllGroups -eq $null)
         {
-            Write-Verbose -Message "No Azure AD Group found for {$OwnerGroup}"
+            Write-Verbose -Message "No Entra ID Group found for {$OwnerGroup}"
         }
         elseif ($AllGroups.Length -gt 1)
         {

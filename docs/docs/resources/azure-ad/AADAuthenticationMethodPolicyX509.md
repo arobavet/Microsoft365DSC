@@ -5,7 +5,7 @@
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
 | **AuthenticationModeConfiguration** | Write | MSFT_MicrosoftGraphx509CertificateAuthenticationModeConfiguration | Defines strong authentication configurations. This configuration includes the default authentication mode and the different rules for strong authentication bindings. | |
-| **CertificateUserBindings** | Write | MSFT_MicrosoftGraphx509CertificateUserBinding[] | Defines fields in the X.509 certificate that map to attributes of the Azure AD user object in order to bind the certificate to the user. The priority of the object determines the order in which the binding is carried out. The first binding that matches will be used and the rest ignored. | |
+| **CertificateUserBindings** | Write | MSFT_MicrosoftGraphx509CertificateUserBinding[] | Defines fields in the X.509 certificate that map to attributes of the Entra ID user object in order to bind the certificate to the user. The priority of the object determines the order in which the binding is carried out. The first binding that matches will be used and the rest ignored. | |
 | **ExcludeTargets** | Write | MSFT_AADAuthenticationMethodPolicyX509ExcludeTarget[] | Displayname of the groups of users that are excluded from a policy. | |
 | **IncludeTargets** | Write | MSFT_AADAuthenticationMethodPolicyX509IncludeTarget[] | Displayname of the groups of users that are included from a policy. | |
 | **State** | Write | String | The state of the policy. Possible values are: enabled, disabled. | `enabled`, `disabled` |
@@ -43,8 +43,8 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **Priority** | Write | UInt32 | The priority of the binding. Azure AD uses the binding with the highest priority. This value must be a non-negative integer and unique in the collection of objects in the certificateUserBindings property of an x509CertificateAuthenticationMethodConfiguration object. Required | |
-| **UserProperty** | Write | String | Defines the Azure AD user property of the user object to use for the binding. The possible values are: userPrincipalName, onPremisesUserPrincipalName, email. Required. | |
+| **Priority** | Write | UInt32 | The priority of the binding. Entra ID uses the binding with the highest priority. This value must be a non-negative integer and unique in the collection of objects in the certificateUserBindings property of an x509CertificateAuthenticationMethodConfiguration object. Required | |
+| **UserProperty** | Write | String | Defines the Entra ID user property of the user object to use for the binding. The possible values are: userPrincipalName, onPremisesUserPrincipalName, email. Required. | |
 | **X509CertificateField** | Write | String | The field on the X.509 certificate to use for the binding. The possible values are: PrincipalName, RFC822Name. | |
 
 ### MSFT_AADAuthenticationMethodPolicyX509ExcludeTarget
@@ -53,7 +53,7 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **Id** | Write | String | The object identifier of an Azure AD group. | |
+| **Id** | Write | String | The object identifier of an Entra ID group. | |
 | **TargetType** | Write | String | The type of the authentication method target. Possible values are: group and unknownFutureValue. | `group`, `unknownFutureValue` |
 
 ### MSFT_AADAuthenticationMethodPolicyX509IncludeTarget
@@ -62,7 +62,7 @@
 
 | Parameter | Attribute | DataType | Description | Allowed Values |
 | --- | --- | --- | --- | --- |
-| **Id** | Write | String | The object identifier of an Azure AD group. | |
+| **Id** | Write | String | The object identifier of an Entra ID group. | |
 | **isRegistrationRequired** | Write | Boolean | Determines if the user is enforced to register the authentication method. | |
 | **TargetType** | Write | String | The type of the authentication method target. Possible values are: group and unknownFutureValue. | `group`, `unknownFutureValue` |
 

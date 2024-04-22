@@ -67,7 +67,7 @@
 
 ## Description
 
-Intune Windows Autopilot Deployment Profile Azure AD Joined
+Intune Windows Autopilot Deployment Profile Entra ID Joined
 
 ## Permissions
 

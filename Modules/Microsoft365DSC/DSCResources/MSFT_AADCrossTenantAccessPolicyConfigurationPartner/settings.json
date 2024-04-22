@@ -1,6 +1,6 @@
 {
     "resourceName": "AADCrossTenantAccessPolicyConfigurationPartner",
-    "description": "This resource configures an Azure AD Authentication Method Policy Configuration Partner.",
+    "description": "This resource configures an Entra ID Authentication Method Policy Configuration Partner.",
     "roles": {
         "read": [
             "Global Reader"

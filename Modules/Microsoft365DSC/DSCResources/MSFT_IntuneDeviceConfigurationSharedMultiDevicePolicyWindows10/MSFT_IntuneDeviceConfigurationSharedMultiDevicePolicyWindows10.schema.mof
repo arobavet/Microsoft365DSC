@@ -28,7 +28,7 @@ class MSFT_IntuneDeviceConfigurationSharedMultiDevicePolicyWindows10 : OMI_BaseR
     [Write, Description("Specifies whether the default shared PC power policies should be disabled.")] Boolean DisablePowerPolicies;
     [Write, Description("Disables the requirement to sign in whenever the device wakes up from sleep mode.")] Boolean DisableSignInOnResume;
     [Write, Description("Enables shared PC mode and applies the shared pc policies.")] Boolean Enabled;
-    [Write, Description("Specifies whether to auto connect new non-admin Azure AD accounts to pre-configured candidate local accounts. Possible values are: notConfigured, enabled, disabled."), ValueMap{"notConfigured","enabled","disabled"}, Values{"notConfigured","enabled","disabled"}] String FastFirstSignIn;
+    [Write, Description("Specifies whether to auto connect new non-admin Entra ID accounts to pre-configured candidate local accounts. Possible values are: notConfigured, enabled, disabled."), ValueMap{"notConfigured","enabled","disabled"}, Values{"notConfigured","enabled","disabled"}] String FastFirstSignIn;
     [Write, Description("Specifies the time in seconds that a device must sit idle before the PC goes to sleep. Setting this value to 0 prevents the sleep timeout from occurring.")] UInt32 IdleTimeBeforeSleepInSeconds;
     [Write, Description("Specifies the display text for the account shown on the sign-in screen which launches the app specified by SetKioskAppUserModelId. Only applies when KioskAppUserModelId is set.")] String KioskAppDisplayName;
     [Write, Description("Specifies the application user model ID of the app to use with assigned access.")] String KioskAppUserModelId;

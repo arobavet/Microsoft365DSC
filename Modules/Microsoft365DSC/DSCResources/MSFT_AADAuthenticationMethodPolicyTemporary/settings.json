@@ -1,6 +1,6 @@
 {
     "resourceName": "AADAuthenticationMethodPolicyTemporary",
-    "description": "This resource configures an Azure AD Authentication Method Policy Temporary.",
+    "description": "This resource configures an Entra ID Authentication Method Policy Temporary.",
     "roles": {
         "read": [
             "Security Reader"

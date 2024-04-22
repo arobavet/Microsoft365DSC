@@ -13,7 +13,7 @@
 | **GroupCreationAllowedGroupName** | Write | String | Name of the security group for which the members are allowed to create Office 365 groups even when EnableGroupCreation == false. | |
 | **AllowToAddGuests** | Write | Boolean | A boolean indicating whether or not is allowed to add guests to this directory. | |
 | **UsageGuidelinesUrl** | Write | String | A link to the Group Usage Guidelines. | |
-| **Ensure** | Write | String | Specify if the Azure AD Groups Naming Policy should exist or not. | `Present`, `Absent` |
+| **Ensure** | Write | String | Specify if the Entra ID Groups Naming Policy should exist or not. | `Present`, `Absent` |
 | **Credential** | Write | PSCredential | Credentials for the Microsoft Graph delegated permissions. | |
 | **ApplicationId** | Write | String | Id of the Azure Active Directory application to authenticate with. | |
 | **TenantId** | Write | String | Id of the Azure Active Directory tenant used for authentication. | |

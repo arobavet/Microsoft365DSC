@@ -85,11 +85,11 @@ function Get-TargetResource
         #endregion
         if ($null -eq $getValue -or $getValue.State -eq 'disabled')
         {
-            Write-Verbose -Message "Could not find an Azure AD Authentication Method Policy Voice with id {$id}"
+            Write-Verbose -Message "Could not find an Entra ID Authentication Method Policy Voice with id {$id}"
             return $nullResult
         }
         $Id = $getValue.Id
-        Write-Verbose -Message "An Azure AD Authentication Method Policy Voice with Id {$Id} was found."
+        Write-Verbose -Message "An Entra ID Authentication Method Policy Voice with Id {$Id} was found."
 
         #region resource generator code
         $complexExcludeTargets = @()
@@ -249,7 +249,7 @@ function Set-TargetResource
 
     if ($Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Updating the Azure AD Authentication Method Policy Voice with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Updating the Entra ID Authentication Method Policy Voice with Id {$($currentInstance.Id)}"
 
         $UpdateParameters = ([Hashtable]$BoundParameters).clone()
         $UpdateParameters = Rename-M365DSCCimInstanceParameter -Properties $UpdateParameters
@@ -297,7 +297,7 @@ function Set-TargetResource
     }
     elseif ($Ensure -eq 'Absent' -and $currentInstance.Ensure -eq 'Present')
     {
-        Write-Verbose -Message "Removing the Azure AD Authentication Method Policy Voice with Id {$($currentInstance.Id)}"
+        Write-Verbose -Message "Removing the Entra ID Authentication Method Policy Voice with Id {$($currentInstance.Id)}"
         #region resource generator code
         Remove-MgBetaPolicyAuthenticationMethodPolicyAuthenticationMethodConfiguration -AuthenticationMethodConfigurationId $currentInstance.Id
         #endregion
@@ -376,7 +376,7 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Authentication Method Policy Voice with Id {$Id}"
+    Write-Verbose -Message "Testing configuration of the Entra ID Authentication Method Policy Voice with Id {$Id}"
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
     $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()
