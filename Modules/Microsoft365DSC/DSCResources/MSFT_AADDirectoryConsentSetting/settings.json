@@ -1,0 +1,40 @@
+﻿{
+    "resourceName":  "AADDirectoryConsentSettings",
+    "description":  "This resource configures the Azure Active Directory Authorization Policy.",
+    "roles":  {
+                  "read":  [
+
+                           ],
+                  "update":  [
+                                 "Privileged Role Administrator"
+                             ]
+              },
+    "permissions":  {
+                        "graph":  {
+                                      "delegated":  {
+                                                        "read":  [
+                                                                     {
+                                                                         "name":  "Directory.Read.All"
+                                                                     }
+                                                                 ],
+                                                        "update":  [
+                                                                       {
+                                                                           "name":  "Directory.ReadWrite.All"
+                                                                       }
+                                                                   ]
+                                                    },
+                                      "application":  {
+                                                          "read":  [
+                                                                       {
+                                                                           "name":  "Directory.Read.All"
+                                                                       }
+                                                                   ],
+                                                          "update":  [
+                                                                         {
+                                                                             "name":  "Directory.ReadWrite.All"
+                                                                         }
+                                                                     ]
+                                                      }
+                                  }
+                    }
+}
