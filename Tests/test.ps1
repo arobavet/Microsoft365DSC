@@ -6,3 +6,6 @@ $Credential = Get-Credential
 
 # Exporting resources using credentials
 Export-M365DSCConfiguration -Components @("AADDirectorySetting") -Credential $Credential -Path "C:\Users\tbouchet\Downloads\Test"
+
+
+New-M365DSCResource -ResourceName "AADDirectorySetting" -Workload "MicrosoftGraph" -CmdLetNoun "MgBetaDirectorySetting" -Path $ResourcePath -UnitTestPath $UnitTestPath -ExampleFilePath $ExamplePath -Credential $Credential

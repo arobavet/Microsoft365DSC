@@ -115,7 +115,7 @@
                        ]
     },
     {
-        "ClassName":  "MSFT_AADDirectoryConsentSettings",
+        "ClassName":  "MSFT_AADDirectorySetting",
         "Parameters":  [
                            {
                                "CIMType":  "String",

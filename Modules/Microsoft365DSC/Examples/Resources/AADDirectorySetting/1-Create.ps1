@@ -15,7 +15,7 @@ Configuration Example
 
     Node localhost
     {
-        AADDirectoryConsentSettings "default"
+        AADDirectorySetting "AADDirectorySetting"
         {
             BlockUserConsentForRiskyApps                    = "True";
             ConstrainGroupSpecificConsentToMembersOfGroupId = "";
