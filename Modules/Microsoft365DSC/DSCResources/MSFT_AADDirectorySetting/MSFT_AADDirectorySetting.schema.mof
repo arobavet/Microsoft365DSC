@@ -1,17 +1,27 @@
+[ClassVersion("1.0.0")]
+class MSFT_MicrosoftGraphSettingValue
+{
+    [Write, Description("Name of the setting (as defined by the directorySettingTemplate).")] String Name;
+    [Write, Description("Value of the setting.")] String Value;
+};
+
 [ClassVersion("1.0.0.0"), FriendlyName("AADDirectorySetting")]
 class MSFT_AADDirectorySetting : OMI_BaseResource
 {
-    [Key, Description("Only valid value is 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
-    [Write, Description("Display name for this policy.")] String DisplayName;
+    [Required, Description("Display name of this group of settings, which comes from the associated template. Read-only.")] String DisplayName;
+    [Write, Description("Unique identifier for the template used to create this group of settings. Read-only.")] String TemplateId;
     [Write, Description("String")] String ConstrainGroupSpecificConsentToMembersOfGroupId;
     [Write, Description("Boolean Indicates whether user group owern can consent to apps accessing their groups")] Boolean EnableGroupSpecificConsent;
     [Write, Description("Boolean Indicates whether user consent will be blocked when a risky request is detected.")] Boolean BlockUserConsentForRiskyApps;
     [Write, Description("Boolean Indicates whether if admin consent is enable.")] Boolean EnableAdminConsentRequests;
-    [Write, Description("Specify that the Entra Consent Policy should exist."), ValueMap{""Present","Absent""}, Values{""Present","Absent""}] String Ensure;
-    [Write, Description("Credentials for the Microsoft Graph delegated permissions."), EmbeddedInstance("MSFT_Credential")] String Credential;
+    [Write, Description("Collection of name-value pairs corresponding to the name and defaultValue properties in the referenced directorySettingTemplates object."), EmbeddedInstance("MSFT_MicrosoftGraphsettingValue")] String Values[];
+    [Key, Description("Only valid value is 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
+    [Key, Description("The unique identifier for an entity. Read-only.")] String Id;
+    [Write, Description("Present ensures the policy exists, absent ensures it is removed."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] string Ensure;
+    [Write, Description("Credentials of the Admin"), EmbeddedInstance("MSFT_Credential")] string Credential;
     [Write, Description("Id of the Azure Active Directory application to authenticate with.")] String ApplicationId;
     [Write, Description("Id of the Azure Active Directory tenant used for authentication.")] String TenantId;
-    [Write, Description("Secret of the Azure Active Directory application to authenticate with."), EmbeddedInstance("MSFT_Credential")] String ApplicationSecret;
+    [Write, Description("Secret of the Azure Active Directory tenant used for authentication."), EmbeddedInstance("MSFT_Credential")] String ApplicationSecret;
     [Write, Description("Thumbprint of the Azure Active Directory application's authentication certificate to use for authentication.")] String CertificateThumbprint;
     [Write, Description("Managed ID being used for authentication.")] Boolean ManagedIdentity;
 };

@@ -4,28 +4,31 @@ function Get-TargetResource
     [OutputType([System.Collections.Hashtable])]
     param
     (
-        #region resource generator code
         [Parameter(Mandatory = $true)]
+        [System.String]
+        [ValidateSet('Yes')]
+        $IsSingleInstance,
+
+        [Parameter()]
         [System.String]
         $DisplayName,
 
         [Parameter()]
-        [System.String]
-        $TemplateId,
+        [System.Boolean]
+        $EnableGroupSpecificConsent,
 
         [Parameter()]
-        [Microsoft.Management.Infrastructure.CimInstance[]]
-        $Values,
-
-        [Parameter(Mandatory = $true)]
-        [System.String]
-        $Id,
-
-        #endregion
+        [System.Boolean]
+        $BlockUserConsentForRiskyApps,
 
         [Parameter()]
+        [System.Boolean]
+        $EnableAdminConsentRequests,
+
+        #Auth
+        [Parameter()]
+        [ValidateSet('Present', 'Absent')]
         [System.String]
-        [ValidateSet('Absent', 'Present')]
         $Ensure = 'Present',
 
         [Parameter()]
@@ -53,84 +56,58 @@ function Get-TargetResource
         $ManagedIdentity
     )
 
+    Write-Verbose -Message 'Getting configuration of AzureAD Groups Settings'
+    $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
+        -InboundParameters $PSBoundParameters
+
+    #Ensure the proper dependencies are installed in the current environment.
+    Confirm-M365DSCDependencies
+
+    #region Telemetry
+    $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
+    $CommandName = $MyInvocation.MyCommand
+    $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
+        -CommandName $CommandName `
+        -Parameters $PSBoundParameters
+    Add-M365DSCTelemetryEvent -Data $data
+    #endregion
+
+    $nullReturn = $PSBoundParameters
+    $nullReturn.Ensure = 'Absent'
     try
     {
-        $ConnectionMode = New-M365DSCConnection -Workload 'MicrosoftGraph' `
-            -InboundParameters $PSBoundParameters
+        $consentSettingsTemplateId = 'dffd5d46-495d-40a9-8e21-954ff55e198a' # Consent Policy Settings
+        $Policy = Get-MgBetaDirectorySetting -ErrorAction Stop
+        $Policy = Get-MgBetaDirectorySetting | Where-Object { $_.TemplateId -eq $consentSettingsTemplateId }
 
-        #Ensure the proper dependencies are installed in the current environment.
-        Confirm-M365DSCDependencies
-
-        #region Telemetry
-        $ResourceName = $MyInvocation.MyCommand.ModuleName.Replace('MSFT_', '')
-        $CommandName = $MyInvocation.MyCommand
-        $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
-            -CommandName $CommandName `
-            -Parameters $PSBoundParameters
-        Add-M365DSCTelemetryEvent -Data $data
-        #endregion
-
-        $nullResult = $PSBoundParameters
-        $nullResult.Ensure = 'Absent'
-
-        $getValue = $null
-        #region resource generator code
-        $getValue = Get-MgBetaDirectorySetting -DirectorySettingId $Id  -ErrorAction SilentlyContinue
-
-        if ($null -eq $getValue)
+        if ($null -eq $Policy)
         {
-            Write-Verbose -Message "Could not find an Azure AD Directory Setting with Id {$Id}"
+            return $nullReturn
+        }
+        else
+        {
+            Write-Verbose -Message 'Get-TargetResource: Found existing directory setting'
 
-            if (-Not [string]::IsNullOrEmpty($DisplayName))
-            {
-                $getValue = Get-MgBetaDirectorySetting `
-                    -ErrorAction SilentlyContinue | Where-Object `
-                    -FilterScript { `
-                        $_.DisplayName -eq "$($DisplayName)" `
-                        -and $_.AdditionalProperties.'@odata.type' -eq "#microsoft.graph.DirectorySetting" `
-                    }
+            $result = @{
+                IsSingleInstance                                = 'Yes'
+                DisplayName                                     = $Policy.DisplayName
+                EnableGroupSpecificConsent                      = $Policy.Values[0].Value
+                BlockUserConsentForRiskyApps                    = $Policy.Values[1].Value
+                EnableAdminConsentRequests                      = $Policy.Values[2].Value
+                ConstrainGroupSpecificConsentToMembersOfGroupId = $Policy.Values[3].Value
+                Ensure                                          = 'Present'
+                Credential                                      = $Credential
+                ApplicationSecret                               = $ApplicationSecret
+                ApplicationId                                   = $ApplicationId
+                TenantId                                        = $TenantId
+                CertificateThumbprint                           = $CertificateThumbprint
+                Managedidentity                                 = $ManagedIdentity.IsPresent
+                Id                                              = $Policy.Id
             }
-        }
-        #endregion
-        if ($null -eq $getValue)
-        {
-            Write-Verbose -Message "Could not find an Azure AD Directory Setting with DisplayName {$DisplayName}"
-            return $nullResult
-        }
-        $Id = $getValue.Id
-        Write-Verbose -Message "An Azure AD Directory Setting with Id {$Id} and DisplayName {$DisplayName} was found."
 
-        #region resource generator code
-        $complexValues = @()
-        foreach ($currentValues in $getValue.values)
-        {
-            $myValues = @{}
-            $myValues.Add('Name', $currentValues.name)
-            $myValues.Add('Value', $currentValues.value)
-            if ($myValues.values.Where({$null -ne $_}).count -gt 0)
-            {
-                $complexValues += $myValues
-            }
+            Write-Verbose -Message "Get-TargetResource Result: `n $(Convert-M365DscHashtableToString -Hashtable $result)"
+            return [System.Collections.Hashtable] $result
         }
-        #endregion
-
-        $results = @{
-            #region resource generator code
-            DisplayName           = $getValue.DisplayName
-            TemplateId            = $getValue.TemplateId
-            Values                = $complexValues
-            Id                    = $getValue.Id
-            Ensure                = 'Present'
-            Credential            = $Credential
-            ApplicationId         = $ApplicationId
-            TenantId              = $TenantId
-            ApplicationSecret     = $ApplicationSecret
-            CertificateThumbprint = $CertificateThumbprint
-            Managedidentity       = $ManagedIdentity.IsPresent
-            #endregion
-        }
-
-        return [System.Collections.Hashtable] $results
     }
     catch
     {
@@ -140,7 +117,7 @@ function Get-TargetResource
             -TenantId $TenantId `
             -Credential $Credential
 
-        return $nullResult
+        return $nullReturn
     }
 }
 
@@ -149,27 +126,30 @@ function Set-TargetResource
     [CmdletBinding()]
     param
     (
-        #region resource generator code
         [Parameter(Mandatory = $true)]
+        [System.String]
+        [ValidateSet('Yes')]
+        $IsSingleInstance,
+
+        [Parameter()]
         [System.String]
         $DisplayName,
 
         [Parameter()]
-        [System.String]
-        $TemplateId,
+        [System.Boolean]
+        $EnableGroupSpecificConsent,
 
         [Parameter()]
-        [Microsoft.Management.Infrastructure.CimInstance[]]
-        $Values,
+        [System.Boolean]
+        $BlockUserConsentForRiskyApps,
 
-        [Parameter(Mandatory = $true)]
-        [System.String]
-        $Id,
-
-        #endregion
         [Parameter()]
+        [System.Boolean]
+        $EnableAdminConsentRequests,
+
+        [Parameter()]
+        [ValidateSet('Present', 'Absent')]
         [System.String]
-        [ValidateSet('Absent', 'Present')]
         $Ensure = 'Present',
 
         [Parameter()]
@@ -197,11 +177,13 @@ function Set-TargetResource
         $ManagedIdentity
     )
 
+    Write-Verbose -Message 'Setting configuration of Entra ID Groups Settings'
+
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
 
     #region Telemetry
-    $ResourceName = $MyInvocation.MyCommand.ModuleName.Replace('MSFT_', '')
+    $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
     $CommandName = $MyInvocation.MyCommand
     $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
         -CommandName $CommandName `
@@ -209,61 +191,64 @@ function Set-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    $currentInstance = Get-TargetResource @PSBoundParameters
+    $currentPolicy = Get-TargetResource @PSBoundParameters
 
-    $BoundParameters = Remove-M365DSCAuthenticationParameter -BoundParameters $PSBoundParameters
-
-    if ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Absent')
+    # Policy should exist but it doesn't
+    $needToUpdate = $false
+    if ($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Absent')
     {
-        Write-Verbose -Message "Creating an Azure AD Directory Setting with DisplayName {$DisplayName}"
+        Write-Verbose 'Consent Policy not present'
+        $consentSettingsTemplateId = 'dffd5d46-495d-40a9-8e21-954ff55e198a' # Consent Policy Settings
+        $params = @{
+            TemplateId = $consentSettingsTemplateId
+            Values     = @(
+                @{
+                    Name  = 'BlockUserConsentForRiskyApps'
+                    Value = 'True'
+                }
+                @{
+                    Name  = 'ConstrainGroupSpecificConsentToMembersOfGroupId'
+                    Value = ''
+                }
+                @{
+                    Name  = 'EnableAdminConsentRequests'
+                    Value = 'True'
+                }
+                @{
+                    Name  = 'EnableGroupSpecificConsent'
+                    Value = 'True'
+                }
+            )
+        }
+        $ConsentSetting = New-MgBetaDirectorySetting -BodyParameter $params
+        $needToUpdate = $true
+    }
 
-        $CreateParameters = ([Hashtable]$BoundParameters).clone()
-        $CreateParameters = Rename-M365DSCCimInstanceParameter -Properties $CreateParameters
-        $CreateParameters.Remove('Id') | Out-Null
+    $Policy = Get-MgBetaDirectorySetting | Where-Object -FilterScript { $_.DisplayName -eq 'Consent Policy Settings' }
 
-        $keys = (([Hashtable]$CreateParameters).clone()).Keys
-        foreach ($key in $keys)
+    if (($Ensure -eq 'Present' -and $currentPolicy.Ensure -eq 'Present') -or $needToUpdate)
+    {
+        foreach ($property in $Policy.Values)
         {
-            if ($null -ne $CreateParameters.$key -and $CreateParameters.$key.getType().Name -like '*cimInstance*')
+            if ($property.Name -eq 'EnableGroupSpecificConsent')
             {
-                $CreateParameters.$key = Convert-M365DSCDRGComplexTypeToHashtable -ComplexObject $CreateParameters.$key
+                $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'EnableGroupSpecificConsent' }
+                $entry.Value = [System.Boolean]$EnableGroupSpecificConsent
+            }
+            elseif ($property.Name -eq 'BlockUserConsentForRiskyApps')
+            {
+                $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'BlockUserConsentForRiskyApps' }
+                $entry.Value = [System.Boolean]$BlockUserConsentForRiskyApps
+            }
+            elseif ($property.Name -eq 'EnableAdminConsentRequests')
+            {
+                $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'EnableAdminConsentRequests' }
+                $entry.Value = [System.Boolean]$EnableAdminConsentRequests
             }
         }
-        #region resource generator code
-        $CreateParameters.Add("@odata.type", "#microsoft.graph.DirectorySetting")
-        $policy = New-MgBetaDirectorySetting -BodyParameter $CreateParameters
-        #endregion
-    }
-    elseif ($Ensure -eq 'Present' -and $currentInstance.Ensure -eq 'Present')
-    {
-        Write-Verbose -Message "Updating the Azure AD Directory Setting with Id {$($currentInstance.Id)}"
 
-        $UpdateParameters = ([Hashtable]$BoundParameters).clone()
-        $UpdateParameters = Rename-M365DSCCimInstanceParameter -Properties $UpdateParameters
-
-        $UpdateParameters.Remove('Id') | Out-Null
-
-        $keys = (([Hashtable]$UpdateParameters).clone()).Keys
-        foreach ($key in $keys)
-        {
-            if ($null -ne $UpdateParameters.$key -and $UpdateParameters.$key.getType().Name -like '*cimInstance*')
-            {
-                $UpdateParameters.$key = Convert-M365DSCDRGComplexTypeToHashtable -ComplexObject $UpdateParameters.$key
-            }
-        }
-        #region resource generator code
-        $UpdateParameters.Add("@odata.type", "#microsoft.graph.DirectorySetting")
-        Update-MgBetaDirectorySetting  `
-            -DirectorySettingId $currentInstance.Id `
-            -BodyParameter $UpdateParameters
-        #endregion
-    }
-    elseif ($Ensure -eq 'Absent' -and $currentInstance.Ensure -eq 'Present')
-    {
-        Write-Verbose -Message "Removing the Azure AD Directory Setting with Id {$($currentInstance.Id)}" 
-        #region resource generator code
-Remove-MgBetaDirectorySetting -DirectorySettingId $currentInstance.Id
-        #endregion
+        Write-Verbose -Message "Updating Policy's Values with $($Policy.Values | Out-String)"
+        Update-MgBetaDirectorySetting -DirectorySettingId $Policy.id -Values $Policy.Values | Out-Null
     }
 }
 
@@ -273,28 +258,30 @@ function Test-TargetResource
     [OutputType([System.Boolean])]
     param
     (
-        #region resource generator code
         [Parameter(Mandatory = $true)]
+        [System.String]
+        [ValidateSet('Yes')]
+        $IsSingleInstance,
+
+        [Parameter()]
         [System.String]
         $DisplayName,
 
         [Parameter()]
-        [System.String]
-        $TemplateId,
+        [System.Boolean]
+        $EnableGroupSpecificConsent,
 
         [Parameter()]
-        [Microsoft.Management.Infrastructure.CimInstance[]]
-        $Values,
-
-        [Parameter(Mandatory = $true)]
-        [System.String]
-        $Id,
-
-        #endregion
+        [System.Boolean]
+        $BlockUserConsentForRiskyApps,
 
         [Parameter()]
+        [System.Boolean]
+        $EnableAdminConsentRequests,
+
+        [Parameter()]
+        [ValidateSet('Present', 'Absent')]
         [System.String]
-        [ValidateSet('Absent', 'Present')]
         $Ensure = 'Present',
 
         [Parameter()]
@@ -322,11 +309,12 @@ function Test-TargetResource
         $ManagedIdentity
     )
 
+
     #Ensure the proper dependencies are installed in the current environment.
     Confirm-M365DSCDependencies
 
     #region Telemetry
-    $ResourceName = $MyInvocation.MyCommand.ModuleName.Replace('MSFT_', '')
+    $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
     $CommandName = $MyInvocation.MyCommand
     $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
         -CommandName $CommandName `
@@ -334,61 +322,23 @@ function Test-TargetResource
     Add-M365DSCTelemetryEvent -Data $data
     #endregion
 
-    Write-Verbose -Message "Testing configuration of the Azure AD Directory Setting with Id {$Id} and DisplayName {$DisplayName}"
+    Write-Verbose -Message 'Testing configuration of Entra ID Consent Settings'
 
     $CurrentValues = Get-TargetResource @PSBoundParameters
-    $ValuesToCheck = ([Hashtable]$PSBoundParameters).clone()
-
-    if ($CurrentValues.Ensure -ne $Ensure)
-    {
-        Write-Verbose -Message "Test-TargetResource returned $false"
-        return $false
-    }
-    $testResult = $true
-
-    #Compare Cim instances
-    foreach ($key in $PSBoundParameters.Keys)
-    {
-        $source = $PSBoundParameters.$key
-        $target = $CurrentValues.$key
-        if ($source.getType().Name -like '*CimInstance*')
-        {
-            $source = Get-M365DSCDRGComplexTypeToHashtable -ComplexObject $source
-
-            $testResult = Compare-M365DSCComplexObject `
-                -Source ($source) `
-                -Target ($target)
-
-            if (-Not $testResult)
-            {
-                $testResult = $false
-                break
-            }
-
-            $ValuesToCheck.Remove($key) | Out-Null
-        }
-    }
-
-    $ValuesToCheck.remove('Id') | Out-Null
-    $ValuesToCheck.Remove('Credential') | Out-Null
-    $ValuesToCheck.Remove('ApplicationId') | Out-Null
-    $ValuesToCheck.Remove('TenantId') | Out-Null
-    $ValuesToCheck.Remove('ApplicationSecret') | Out-Null
 
     Write-Verbose -Message "Current Values: $(Convert-M365DscHashtableToString -Hashtable $CurrentValues)"
-    Write-Verbose -Message "Target Values: $(Convert-M365DscHashtableToString -Hashtable $ValuesToCheck)"
+    Write-Verbose -Message "Target Values: $(Convert-M365DscHashtableToString -Hashtable $PSBoundParameters)"
 
-    if ($testResult)
-    {
-        $testResult = Test-M365DSCParameterState -CurrentValues $CurrentValues `
-            -Source $($MyInvocation.MyCommand.Source) `
-            -DesiredValues $PSBoundParameters `
-            -ValuesToCheck $ValuesToCheck.Keys
-    }
+    $ValuesToCheck = $PSBoundParameters
 
-    Write-Verbose -Message "Test-TargetResource returned $testResult"
+    $TestResult = Test-M365DSCParameterState -CurrentValues $CurrentValues `
+        -Source $($MyInvocation.MyCommand.Source) `
+        -DesiredValues $PSBoundParameters `
+        -ValuesToCheck $ValuesToCheck.Keys
 
-    return $testResult
+    Write-Verbose -Message "Test-TargetResource returned $TestResult"
+
+    return $TestResult
 }
 
 function Export-TargetResource
@@ -429,7 +379,7 @@ function Export-TargetResource
     Confirm-M365DSCDependencies
 
     #region Telemetry
-    $ResourceName = $MyInvocation.MyCommand.ModuleName.Replace('MSFT_', '')
+    $ResourceName = $MyInvocation.MyCommand.ModuleName -replace 'MSFT_', ''
     $CommandName = $MyInvocation.MyCommand
     $data = Format-M365DSCTelemetryParameters -ResourceName $ResourceName `
         -CommandName $CommandName `
@@ -439,76 +389,28 @@ function Export-TargetResource
 
     try
     {
-        #region resource generator code
-        [array]$getValue = Get-MgBetaDirectorySetting `
-            -All `
-            -ErrorAction Stop
-        #endregion
-
-        $i = 1
+        $Params = @{
+            ApplicationId         = $ApplicationId
+            TenantId              = $TenantId
+            CertificateThumbprint = $CertificateThumbprint
+            IsSingleInstance      = 'Yes'
+            ApplicationSecret     = $ApplicationSecret
+            Credential            = $Credential
+            Managedidentity       = $ManagedIdentity.IsPresent
+        }
         $dscContent = ''
-        if ($getValue.Length -eq 0)
-        {
-            Write-Host $Global:M365DSCEmojiGreenCheckMark
-        }
-        else
-        {
-            Write-Host "`r`n" -NoNewline
-        }
-        foreach ($config in $getValue)
-        {
-            $displayedKey = $config.Id
-            if (-not [String]::IsNullOrEmpty($config.displayName))
-            {
-                $displayedKey = $config.displayName
-            }
-            Write-Host "    |---[$i/$($getValue.Count)] $displayedKey" -NoNewline
-            $params = @{
-                Id = $config.Id
-                DisplayName           =  $config.DisplayName
-                Ensure = 'Present'
-                Credential = $Credential
-                ApplicationId = $ApplicationId
-                TenantId = $TenantId
-                ApplicationSecret = $ApplicationSecret
-                CertificateThumbprint = $CertificateThumbprint
-                Managedidentity = $ManagedIdentity.IsPresent
-            }
-
-            $Results = Get-TargetResource @Params
-            $Results = Update-M365DSCExportAuthenticationResults -ConnectionMode $ConnectionMode `
-                -Results $Results
-            if ($null -ne $Results.Values)
-            {
-                $complexTypeStringResult = Get-M365DSCDRGComplexTypeToString `
-                    -ComplexObject $Results.Values `
-                    -CIMInstanceName 'MicrosoftGraphsettingValue'
-                if (-Not [String]::IsNullOrWhiteSpace($complexTypeStringResult))
-                {
-                    $Results.Values = $complexTypeStringResult
-                }
-                else
-                {
-                    $Results.Remove('Values') | Out-Null
-                }
-            }
-
-            $currentDSCBlock = Get-M365DSCExportContentForResource -ResourceName $ResourceName `
-                -ConnectionMode $ConnectionMode `
-                -ModulePath $PSScriptRoot `
-                -Results $Results `
-                -Credential $Credential
-            if ($Results.Values)
-            {
-                $currentDSCBlock = Convert-DSCStringParamToVariable -DSCBlock $currentDSCBlock -ParameterName "Values" -isCIMArray:$True
-            }
-
-            $dscContent += $currentDSCBlock
-            Save-M365DSCPartialExport -Content $currentDSCBlock `
-                -FileName $Global:PartialExportFileName
-            $i++
-            Write-Host $Global:M365DSCEmojiGreenCheckMark
-        }
+        $Results = Get-TargetResource @Params
+        $Results = Update-M365DSCExportAuthenticationResults -ConnectionMode $ConnectionMode `
+            -Results $Results
+        $currentDSCBlock = Get-M365DSCExportContentForResource -ResourceName $ResourceName `
+            -ConnectionMode $ConnectionMode `
+            -ModulePath $PSScriptRoot `
+            -Results $Results `
+            -Credential $Credential
+        $dscContent += $currentDSCBlock
+        Save-M365DSCPartialExport -Content $currentDSCBlock `
+            -FileName $Global:PartialExportFileName
+        Write-Host $Global:M365DSCEmojiGreenCheckMark
         return $dscContent
     }
     catch
