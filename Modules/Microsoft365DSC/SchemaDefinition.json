@@ -115,6 +115,76 @@
                        ]
     },
     {
+        "ClassName":  "MSFT_AADDirectoryConsentSettings",
+        "Parameters":  [
+                           {
+                               "CIMType":  "String",
+                               "Name":  "DisplayName",
+                               "Option":  "Key"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "Id",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Boolean",
+                               "Name":  "EnableGroupSpecificConsent",
+                               "Option":  "Write"
+                           },
+                           {
+                            "CIMType":  "Boolean",
+                            "Name":  "BlockUserConsentForRiskyApps",
+                            "Option":  "Write"
+                            },
+                            {
+                                "CIMType":  "Boolean",
+                                "Name":  "EnableAdminConsentRequests",
+                                "Option":  "Write"
+                            },
+                            {
+                                "CIMType":  "String",
+                                "Name":  "ConstrainGroupSpecificConsentToMembersOfGroupId",
+                                "Option":  "Write"
+                            },
+                           {
+                               "CIMType":  "string",
+                               "Name":  "Ensure",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "MSFT_Credential",
+                               "Name":  "Credential",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "ApplicationId",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "TenantId",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "MSFT_Credential",
+                               "Name":  "ApplicationSecret",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "CertificateThumbprint",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Boolean",
+                               "Name":  "ManagedIdentity",
+                               "Option":  "Write"
+                           }
+                       ]
+    },
+    {
         "ClassName":  "MSFT_AADApplicationPermission",
         "Parameters":  [
                            {
