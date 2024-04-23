@@ -91,10 +91,10 @@ function Get-TargetResource
             $result = @{
                 IsSingleInstance                                = 'Yes'
                 DisplayName                                     = $Policy.DisplayName
-                EnableGroupSpecificConsent                      = $Policy.Values[0].Value
-                BlockUserConsentForRiskyApps                    = $Policy.Values[1].Value
-                EnableAdminConsentRequests                      = $Policy.Values[2].Value
-                ConstrainGroupSpecificConsentToMembersOfGroupId = $Policy.Values[3].Value
+                EnableGroupSpecificConsent                      = [System.Boolean]$Policy.Values[0].Value
+                BlockUserConsentForRiskyApps                    = [System.Boolean]$Policy.Values[1].Value
+                EnableAdminConsentRequests                      = [System.Boolean]$Policy.Values[2].Value
+                ConstrainGroupSpecificConsentToMembersOfGroupId = [System.String]$Policy.Values[3].Value
                 Ensure                                          = 'Present'
                 Credential                                      = $Credential
                 ApplicationSecret                               = $ApplicationSecret
