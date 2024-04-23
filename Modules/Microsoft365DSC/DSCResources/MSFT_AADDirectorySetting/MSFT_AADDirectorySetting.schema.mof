@@ -1,5 +1,5 @@
-[ClassVersion("1.0.0.0"), FriendlyName("AADDirectoryConsentSettings")]
-class MSFT_AADDirectoryConsentSettings : OMI_BaseResource
+[ClassVersion("1.0.0.0"), FriendlyName("AADDirectorySetting")]
+class MSFT_AADDirectorySetting : OMI_BaseResource
 {
     [Key, Description("Only valid value is 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
     [Write, Description("Display name for this policy.")] String DisplayName;

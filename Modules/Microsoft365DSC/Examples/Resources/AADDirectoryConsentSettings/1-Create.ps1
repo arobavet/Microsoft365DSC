@@ -3,7 +3,7 @@ This example is used to test new resources and showcase the usage of new resourc
 It is not meant to use as a production baseline.
 #>
 
-Configuration M365TenantConfig
+Configuration Example
 {
     param (
         [Parameter(Mandatory = $true)]
@@ -15,7 +15,7 @@ Configuration M365TenantConfig
 
     Node localhost
     {
-        AADDirectoryConsentSettings "AADDirectoryConsentSettings"
+        AADDirectoryConsentSettings "default"
         {
             BlockUserConsentForRiskyApps                    = "True";
             ConstrainGroupSpecificConsentToMembersOfGroupId = "";
