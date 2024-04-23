@@ -3,6 +3,7 @@ class MSFT_AADDirectorySetting : OMI_BaseResource
 {
     [Key, Description("Only valid value is 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
     [Write, Description("Display name for this policy.")] String DisplayName;
+    [Write, Description("String")] String ConstrainGroupSpecificConsentToMembersOfGroupId;
     [Write, Description("Boolean Indicates whether user group owern can consent to apps accessing their groups")] Boolean EnableGroupSpecificConsent;
     [Write, Description("Boolean Indicates whether user consent will be blocked when a risky request is detected.")] Boolean BlockUserConsentForRiskyApps;
     [Write, Description("Boolean Indicates whether if admin consent is enable.")] Boolean EnableAdminConsentRequests;
