@@ -106,7 +106,7 @@ function Get-TargetResource
             }
 
             Write-Verbose -Message "Get-TargetResource Result: `n $(Convert-M365DscHashtableToString -Hashtable $result)"
-            return $result
+            return [System.Collections.Hashtable] $result
         }
     }
     catch
