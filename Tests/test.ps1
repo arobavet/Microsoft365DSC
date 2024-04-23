@@ -5,4 +5,4 @@
 $Credential = Get-Credential
 
 # Exporting resources using credentials
-Export-M365DSCConfiguration -Components @("AADDirectoryConsentSettings") -Credential $Credential
+Export-M365DSCConfiguration -Components @("AADGroupsSettings") -Credential $Credential -Path "C:\Users\tbouchet\Downloads\Test\group"
