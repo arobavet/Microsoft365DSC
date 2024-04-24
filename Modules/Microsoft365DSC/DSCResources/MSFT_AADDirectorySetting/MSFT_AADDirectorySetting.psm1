@@ -243,6 +243,11 @@ function Set-TargetResource
                 $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'EnableAdminConsentRequests' }
                 $entry.Value = [System.Boolean]$EnableAdminConsentRequests
             }
+            elseif ($property.Name -eq 'ConstrainGroupSpecificConsentToMembersOfGroupId')
+            {
+                $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'ConstrainGroupSpecificConsentToMembersOfGroupId' }
+                $entry.Value = [System.Boolean]$ConstrainGroupSpecificConsentToMembersOfGroupId
+            }
         }
 
         Write-Verbose -Message "Updating Policy's Values with $($Policy.Values | Out-String)"
