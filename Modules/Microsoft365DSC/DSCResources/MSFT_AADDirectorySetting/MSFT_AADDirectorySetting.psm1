@@ -10,10 +10,6 @@ function Get-TargetResource
         $IsSingleInstance,
 
         [Parameter()]
-        [System.String]
-        $DisplayName,
-
-        [Parameter()]
         [System.Boolean]
         $EnableGroupSpecificConsent,
 
@@ -24,6 +20,10 @@ function Get-TargetResource
         [Parameter()]
         [System.Boolean]
         $EnableAdminConsentRequests,
+
+        [Parameter()]
+        [System.String]
+        $ConstrainGroupSpecificConsentToMembersOfGroupId,
 
         #Auth
         [Parameter()]
@@ -90,11 +90,10 @@ function Get-TargetResource
 
             $result = @{
                 IsSingleInstance                                = 'Yes'
-                DisplayName                                     = $Policy.DisplayName
-                EnableGroupSpecificConsent                      = [System.Boolean]$Policy.Values[0].Value
-                BlockUserConsentForRiskyApps                    = [System.Boolean]$Policy.Values[1].Value
-                EnableAdminConsentRequests                      = [System.Boolean]$Policy.Values[2].Value
-                ConstrainGroupSpecificConsentToMembersOfGroupId = [System.String]$Policy.Values[3].Value
+                EnableGroupSpecificConsent                      = [Boolean]::Parse($Policy.Values[0].Value)
+                BlockUserConsentForRiskyApps                    = [Boolean]::Parse($Policy.Values[1].Value)
+                EnableAdminConsentRequests                      = [Boolean]::Parse($Policy.Values[2].Value)
+                ConstrainGroupSpecificConsentToMembersOfGroupId = $Policy.Values[3].Value
                 Ensure                                          = 'Present'
                 Credential                                      = $Credential
                 ApplicationSecret                               = $ApplicationSecret
@@ -102,7 +101,6 @@ function Get-TargetResource
                 TenantId                                        = $TenantId
                 CertificateThumbprint                           = $CertificateThumbprint
                 Managedidentity                                 = $ManagedIdentity.IsPresent
-                Id                                              = $Policy.Id
             }
 
             Write-Verbose -Message "Get-TargetResource Result: `n $(Convert-M365DscHashtableToString -Hashtable $result)"
@@ -132,10 +130,6 @@ function Set-TargetResource
         $IsSingleInstance,
 
         [Parameter()]
-        [System.String]
-        $DisplayName,
-
-        [Parameter()]
         [System.Boolean]
         $EnableGroupSpecificConsent,
 
@@ -146,6 +140,10 @@ function Set-TargetResource
         [Parameter()]
         [System.Boolean]
         $EnableAdminConsentRequests,
+
+        [Parameter()]
+        [System.String]
+        $ConstrainGroupSpecificConsentToMembersOfGroupId,
 
         [Parameter()]
         [ValidateSet('Present', 'Absent')]
@@ -264,10 +262,6 @@ function Test-TargetResource
         $IsSingleInstance,
 
         [Parameter()]
-        [System.String]
-        $DisplayName,
-
-        [Parameter()]
         [System.Boolean]
         $EnableGroupSpecificConsent,
 
@@ -278,6 +272,10 @@ function Test-TargetResource
         [Parameter()]
         [System.Boolean]
         $EnableAdminConsentRequests,
+
+        [Parameter()]
+        [System.String]
+        $ConstrainGroupSpecificConsentToMembersOfGroupId,
 
         [Parameter()]
         [ValidateSet('Present', 'Absent')]
