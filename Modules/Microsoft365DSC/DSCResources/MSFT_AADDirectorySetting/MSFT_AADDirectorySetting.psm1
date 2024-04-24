@@ -246,7 +246,7 @@ function Set-TargetResource
             elseif ($property.Name -eq 'ConstrainGroupSpecificConsentToMembersOfGroupId')
             {
                 $entry = $Policy.Values | Where-Object -FilterScript { $_.Name -eq 'ConstrainGroupSpecificConsentToMembersOfGroupId' }
-                $entry.Value = [System.Boolean]$ConstrainGroupSpecificConsentToMembersOfGroupId
+                $entry.Value = $ConstrainGroupSpecificConsentToMembersOfGroupId
             }
         }
 
