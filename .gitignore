@@ -11,7 +11,6 @@ node_modules/*
 markdownissues.txt
 start-unittests.ps1
 TestDSCresource.ps1
-Tests/test.ps1
 Modules/Microsoft365DSC/DSCResources/MSFT_EXOMalwareFilterPolicy/Set-MalwareFilterPolicy.txt
 docker/Extract.ps1
 docker/Monitor.ps1
@@ -23,3 +22,4 @@ CodeCov.xml
 
 # generated docs
 docs/site
+Tests/test.ps1
