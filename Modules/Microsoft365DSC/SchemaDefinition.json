@@ -115,6 +115,76 @@
                        ]
     },
     {
+        "ClassName":  "MSFT_AADPasswordRuleSettings",
+        "Parameters":  [
+                           {
+                               "CIMType":  "String",
+                               "Name":  "BannedPasswordCheckOnPremisesMode",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Boolean",
+                               "Name":  "EnableBannedPasswordCheckOnPremises",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Boolean",
+                               "Name":  "EnableBannedPasswordCheck",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Int32",
+                               "Name":  "LockoutDurationInSeconds",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Int32",
+                               "Name":  "LockoutThreshold",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "BannedPasswordList",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "string",
+                               "Name":  "Ensure",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "MSFT_Credential",
+                               "Name":  "Credential",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "ApplicationId",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "TenantId",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "MSFT_Credential",
+                               "Name":  "ApplicationSecret",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "String",
+                               "Name":  "CertificateThumbprint",
+                               "Option":  "Write"
+                           },
+                           {
+                               "CIMType":  "Boolean",
+                               "Name":  "ManagedIdentity",
+                               "Option":  "Write"
+                           }
+                       ]
+    },
+    {
         "ClassName":  "MSFT_AADDirectorySetting",
         "Parameters":  [
                            {
