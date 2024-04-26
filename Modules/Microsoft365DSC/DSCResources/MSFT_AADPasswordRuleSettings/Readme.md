@@ -1,5 +1,5 @@
 
-# AADDirectorySetting
+# AADPasswordRuleSettings
 
 ## Description
 
