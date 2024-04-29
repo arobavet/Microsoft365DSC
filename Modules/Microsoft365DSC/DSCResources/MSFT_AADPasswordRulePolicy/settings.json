@@ -1,5 +1,5 @@
 {
-    "resourceName": "AADPasswordRuleSettings",
+    "resourceName": "AADPasswordRulePolicy",
     "description": "This resource configures Password Rule Policy",
     "permissions":    {
     "graph":  {

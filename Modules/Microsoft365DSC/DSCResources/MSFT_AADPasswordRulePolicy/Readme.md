@@ -1,5 +1,5 @@
 
-# AADPasswordRuleSettings
+# AADPasswordRulePolicy
 
 ## Description
 
