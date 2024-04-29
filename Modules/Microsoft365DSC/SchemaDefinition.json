@@ -133,12 +133,12 @@
                                "Option":  "Write"
                            },
                            {
-                               "CIMType":  "Int32",
+                               "CIMType":  "SInt32",
                                "Name":  "LockoutDurationInSeconds",
                                "Option":  "Write"
                            },
                            {
-                               "CIMType":  "Int32",
+                               "CIMType":  "SInt32",
                                "Name":  "LockoutThreshold",
                                "Option":  "Write"
                            },
