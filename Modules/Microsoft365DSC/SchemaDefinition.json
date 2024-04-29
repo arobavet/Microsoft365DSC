@@ -115,7 +115,7 @@
                        ]
     },
     {
-        "ClassName":  "MSFT_AADPasswordRuleSettings",
+        "ClassName":  "MSFT_AADPasswordRulePolicy",
         "Parameters":  [
                            {
                                "CIMType":  "String",
